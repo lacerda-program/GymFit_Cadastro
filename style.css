@@ -1,0 +1,50 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    transition: background 0.3s ease;
+}
+.form-container, .payment-container, .welcome-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    max-width: 500px;
+    width: 100%;
+    display: none;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+.active {
+    display: block;
+    opacity: 1;
+}
+h1 { color: #333; margin-bottom: 20px; }
+label { display: block; margin-bottom: 5px; font-weight: bold; }
+input, select { width: calc(100% - 20px); padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+input:focus { border-color: #007bff; outline: none; }
+button {
+    background-color: #007bff; color: #fff; border: none;
+    padding: 10px 15px; border-radius: 5px; cursor: pointer; width: 100%; font-size: 16px;
+    transition: background 0.3s;
+}
+button:hover { background-color: #0056b3; }
+.plan-card {
+    border: 2px solid #007bff;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.plan-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+.plan-selected { background-color: #e6f2ff; border-color: #0056b3; }
+#valorInfo { margin-bottom: 15px; font-weight: bold; }
