@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let nomeUsuario = '';
             let planoSelecionado = null;
 
-            // Validação idade
+            // Valida a  idade
             dataNascimentoInput.addEventListener('change', () => {
                 const data = new Date(dataNascimentoInput.value);
                 const hoje = new Date();
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (idade < 16) { alert('Você deve ter pelo menos 16 anos!'); dataNascimentoInput.value = ''; }
             });
 
-            // Validação CPF (somente números)
+            // verificar o cpf, só aceita numeros 
             cpfInput.addEventListener('input', () => {
                 let cpf = cpfInput.value.replace(/\D/g, '');
                 if (cpf.length > 11) cpf = cpf.slice(0, 11);
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 cpfInput.value = cpf;
             });
 
-            // Validação telefone (11 dígitos)
+            // legitimar o numero de telefone, tem que ter 11 digitos
             telefoneInput.addEventListener('input', () => {
                 let tel = telefoneInput.value.replace(/\D/g, '');
                 if (tel.length > 11) tel = tel.slice(0, 11);
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 telefoneInput.value = tel;
             });
 
-            // Avançar para pagamento
+            // aqui apenas avança para pagamento
             avancarBtn.addEventListener('click', () => {
                 const inputs = document.querySelectorAll('#inscricaoForm input');
                 for (let i of inputs) if (i.value.trim() === '') { alert('Preencha todos os campos!'); return; }
@@ -51,19 +51,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 paymentContainer.classList.add('active');
             });
 
-            // Seleção de planos
+            // mostra os planos e deixa dinamico.
             planCards.forEach(card => {
                 card.addEventListener('click', () => {
                     // remove seleção anterior
                     planCards.forEach(c => c.classList.remove('plan-selected'));
                     card.classList.add('plan-selected');
 
-                    // pegar valores
+                    // ppega valores dos planos ja faz a divisão e mostra a frente
                     planoSelecionado = card.dataset.plano;
                     const valorFull = Number(card.dataset.valorFull);
                     const valorDesconto = Number(card.dataset.valorDesconto);
 
-                    // atualizar campo valor e resumo
+                    // atualiza o  campo valor e da um resumo
                     valorInput.value = valorDesconto.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
                     valorInfo.innerHTML = `Plano: <strong>${planoSelecionado}</strong><br>
                                Valor cheio: R$ ${valorFull.toLocaleString('pt-BR')}<br>
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
 
-            // Finalizar inscrição
+            // finaliza a inscrição levando para uma proxima page
             finalizarBtn.addEventListener('click', () => {
                 if (!planoSelecionado) { alert('Selecione um plano!'); return; }
                 userNameSpan.textContent = nomeUsuario;
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 welcomeContainer.classList.add('active');
             });
 
-            // Voltar ao formulário
+            // volta ao formulario inicial e apaga os dados de antes 
             voltarBtn.addEventListener('click', () => {
                 document.getElementById('inscricaoForm').reset();
                 valorInput.value = ''; valorInfo.textContent = ''; planoSelecionado = null;

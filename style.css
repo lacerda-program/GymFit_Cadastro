@@ -1,4 +1,4 @@
-/* ======== ESTILO BASE ======== */
+/*---------- ESTILO PADRÃO ----------*/
 body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #007bff, #00bcd4);
@@ -75,7 +75,7 @@ button:hover {
     transform: scale(1.03);
 }
 
-/* ======== CARTÕES DE PLANOS ======== */
+/*---------- CARTÕES DE PLANOS ---------- */
 .plans-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -115,7 +115,7 @@ button:hover {
     font-size: 15px;
 }
 
-/* ======== TEXTO DE VALOR ======== */
+/*---------- TEXTO DE VALOR ---------- */
 .price-display {
     font-weight: bold;
     color: #007bff;
@@ -123,7 +123,7 @@ button:hover {
     font-size: 18px;
 }
 
-/* ======== RESPONSIVIDADE ======== */
+/*---------- RESPONSIVIDADE ----------*/
 @media (max-width: 600px) {
     .form-container, .payment-container, .welcome-container {
         padding: 20px;
@@ -147,7 +147,7 @@ button:hover {
     }
 }
 
-/* ======== ANIMAÇÕES ======== */
+/*----------- ANIMAÇÕES ----------*/
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
