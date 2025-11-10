@@ -1,50 +1,154 @@
+/* ======== ESTILO BASE ======== */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f8ff;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #007bff, #00bcd4);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    transition: background 0.3s ease;
-}
-.form-container, .payment-container, .welcome-container {
-    background-color: #fff;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.form-container, 
+.payment-container, 
+.welcome-container {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     max-width: 500px;
     width: 100%;
     display: none;
     text-align: center;
-    opacity: 0;
-    transition: opacity 0.5s ease;
+    transition: all 0.3s ease-in-out;
 }
+
 .active {
     display: block;
-    opacity: 1;
+    animation: fadeIn 0.4s ease;
 }
-h1 { color: #333; margin-bottom: 20px; }
-label { display: block; margin-bottom: 5px; font-weight: bold; }
-input, select { width: calc(100% - 20px); padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
-input:focus { border-color: #007bff; outline: none; }
+
+h1 {
+    color: #222;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    text-align: left;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: 0.3s;
+}
+
+input:focus, select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+    outline: none;
+}
+
 button {
-    background-color: #007bff; color: #fff; border: none;
-    padding: 10px 15px; border-radius: 5px; cursor: pointer; width: 100%; font-size: 16px;
-    transition: background 0.3s;
-}
-button:hover { background-color: #0056b3; }
-.plan-card {
-    border: 2px solid #007bff;
-    border-radius: 10px;
-    padding: 15px;
-    margin: 10px 0;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 12px 15px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s;
+    width: 100%;
+    font-size: 16px;
+    transition: background 0.3s, transform 0.2s;
 }
+
+button:hover {
+    background-color: #0056b3;
+    transform: scale(1.03);
+}
+
+/* ======== CARTÕES DE PLANOS ======== */
+.plans-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.plan-card {
+    background-color: #f7f9fc;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
 .plan-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    border-color: #007bff;
+    box-shadow: 0 3px 8px rgba(0, 123, 255, 0.2);
 }
-.plan-selected { background-color: #e6f2ff; border-color: #0056b3; }
-#valorInfo { margin-bottom: 15px; font-weight: bold; }
+
+.plan-card.selected {
+    border-color: #007bff;
+    background-color: #e6f0ff;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+}
+
+.plan-card h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.plan-card p {
+    margin: 8px 0 0;
+    color: #555;
+    font-size: 15px;
+}
+
+/* ======== TEXTO DE VALOR ======== */
+.price-display {
+    font-weight: bold;
+    color: #007bff;
+    margin-top: 15px;
+    font-size: 18px;
+}
+
+/* ======== RESPONSIVIDADE ======== */
+@media (max-width: 600px) {
+    .form-container, .payment-container, .welcome-container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    input, select, button {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .plan-card h3 {
+        font-size: 16px;
+    }
+
+    .plan-card p {
+        font-size: 14px;
+    }
+}
+
+/* ======== ANIMAÇÕES ======== */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
