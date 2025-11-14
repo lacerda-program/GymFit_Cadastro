@@ -54,7 +54,8 @@
         <label for="tipo_pagamento">Forma de Pagamento:</label>
         <select id="tipo_pagamento">
             <option value="pix">Pix</option>
-            <option value="dinheiro">Dinheiro</option>
+            <option value="dinheiro">Débito</option>
+             <option value="pix">Crédito</option>
         </select>
 
         <h3>Escolha seu plano:</h3>
@@ -77,9 +78,9 @@
             Valor cheio: R$ 2400,00<br>
             Com desconto: R$ 1680,00
         </div>
-
+        
         <div id="valorInfo"></div>
-        <input type="text" id="valor" readonly>
+        <input type="text" id="valor" readonly placeholder="Valor a se pagar">
         <button type="button" id="finalizarBtn">Finalizar Inscrição</button>
     </div>
 
@@ -89,14 +90,6 @@
         <p>Nosso mais novo membro da academia GymFit 🏋️‍♂️</p>
         <button type="button" id="voltarBtn">Voltar ao Formulário</button>
     </div>
-
-    <!-- Boas Vindas -->
-    <div class="welcome-container" id="welcomeContainer">
-        <h1>Seja bem-vindo, <span id="userName"></span>!</h1>
-        <p>Nosso mais novo membro da academia GymFit 🏋️‍♂️</p>
-        <button type="button" id="voltarBtn">Voltar ao Formulário</button>
-    </div>
-    
     <script src="script.js"></script>
 
 </body>
