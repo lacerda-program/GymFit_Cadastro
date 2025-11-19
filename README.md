@@ -40,4 +40,5 @@ Você pode visualizar o projeto online através do link:
 - **CSS3** (design responsivo)
 - **JavaScript**
 
-
+---
+Obrigado por ver este projeto e me ajudar, aceito dicas para melhoria e etc...
