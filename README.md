@@ -5,6 +5,13 @@ Bem-vindo ao projeto **GymFit**, uma interface moderna e responsiva desenvolvida
 Este projeto apresenta uma navegação simples, visual limpo e foco na experiência do usuário.
 
 ---
+## 🔗 Acesse a Página
+
+Você pode visualizar o projeto online através do link:
+
+👉 **[Clique aqui para acessar o site](https://lacerda-program.github.io/GymFit_Cadastro/)**  
+
+---
 
 ## 🚀 Funcionalidades
 
