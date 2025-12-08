@@ -39,4 +39,4 @@ Este projeto apresenta uma navegação simples, visual limpo e foco na experiên
 - **postagem no github**
  
 ---
-Ogrigado pela visualização, aceito críticas e ideias de melhoias.
+Obrigado pela visualização, aceito críticas e ideias de melhoias.
