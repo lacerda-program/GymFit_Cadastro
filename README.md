@@ -22,7 +22,7 @@ Você pode visualizar o projeto online através do link:
 
 ## O que você encontrará.
 
-###  **Página de Cadastro**
+###  ✔️**Página de Cadastro**
 
 - Formulário moderno solicitando informações básicas.
 - Layout responsivo em qualquer dispositivo.
