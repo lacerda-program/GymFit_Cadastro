@@ -1,154 +1,260 @@
-/*---------- ESTILO PADRÃO ----------*/
-body {
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #007bff, #00bcd4);
+:root {
+    --primary: #4169E1;   /* Azul Royal */
+    --accent: #32CD32;    /* Verde Limão */
+    --highlight: #FFA500; /* Laranja */
+    --dark: #1a1a1a;
+    --gray: #f4f6f8;
+    --text: #333;
+    --border: #ddd;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+
+body { height: 100vh; overflow: hidden; background: #fff; }
+
+.main-wrapper {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    padding: 20px;
-}
-
-.form-container, 
-.payment-container, 
-.welcome-container {
-    background-color: #ffffff;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
+    height: 100%;
     width: 100%;
-    display: none;
-    text-align: center;
-    transition: all 0.3s ease-in-out;
 }
 
-.active {
-    display: block;
-    animation: fadeIn 0.4s ease;
+/* --- LADO ESQUERDO: FORMULÁRIO (60%) --- */
+.form-section {
+    width: 60%; /* Ajustado para 60% */
+    padding: 40px 80px; /* Aumentei um pouco o padding lateral */
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    background: #fff;
+    position: relative;
+    z-index: 2;
 }
 
-h1 {
-    color: #222;
-    margin-bottom: 20px;
-    font-size: 24px;
-}
+header { margin-bottom: 30px; }
+.logo { font-size: 1.8rem; font-weight: 800; letter-spacing: -1px; color: var(--dark); }
+.highlight { color: var(--primary); }
 
-label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: 600;
-    text-align: left;
-}
+/* Barra de Progresso */
+.progress-container { width: 100%; height: 4px; background: #eee; margin-top: 15px; border-radius: 2px; }
+.progress-bar { height: 100%; background: var(--primary); width: 20%; transition: width 0.5s ease; border-radius: 2px; }
 
-input, select {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-sizing: border-box;
-    transition: 0.3s;
-}
+/* Passos e Animações */
+.step { display: none; animation: fadeInUp 0.6s ease; }
+.step.active { display: block; }
 
-input:focus, select:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
-    outline: none;
-}
-
-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 12px 15px;
-    border-radius: 8px;
-    cursor: pointer;
-    width: 100%;
-    font-size: 16px;
-    transition: background 0.3s, transform 0.2s;
-}
-
-button:hover {
-    background-color: #0056b3;
-    transform: scale(1.03);
-}
-
-/*---------- CARTÕES DE PLANOS ---------- */
-.plans-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
-    margin-top: 20px;
-}
-
-.plan-card {
-    background-color: #f7f9fc;
-    border: 2px solid transparent;
-    border-radius: 10px;
-    padding: 20px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.plan-card:hover {
-    border-color: #007bff;
-    box-shadow: 0 3px 8px rgba(0, 123, 255, 0.2);
-}
-
-.plan-card.selected {
-    border-color: #007bff;
-    background-color: #e6f0ff;
-    box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
-}
-
-.plan-card h3 {
-    margin: 0;
-    font-size: 18px;
-    color: #333;
-}
-
-.plan-card p {
-    margin: 8px 0 0;
-    color: #555;
-    font-size: 15px;
-}
-
-/*---------- TEXTO DE VALOR ---------- */
-.price-display {
-    font-weight: bold;
-    color: #007bff;
-    margin-top: 15px;
-    font-size: 18px;
-}
-
-/*---------- RESPONSIVIDADE ----------*/
-@media (max-width: 600px) {
-    .form-container, .payment-container, .welcome-container {
-        padding: 20px;
-    }
-
-    h1 {
-        font-size: 20px;
-    }
-
-    input, select, button {
-        font-size: 14px;
-        padding: 10px;
-    }
-
-    .plan-card h3 {
-        font-size: 16px;
-    }
-
-    .plan-card p {
-        font-size: 14px;
-    }
-}
-
-/*----------- ANIMAÇÕES ----------*/
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+.step-header h2 { font-size: 2rem; margin-bottom: 5px; color: var(--dark); }
+.step-header p { color: #777; margin-bottom: 30px; }
+
+/* Inputs e Labels */
+.input-group { margin-bottom: 20px; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+label { display: block; font-size: 0.85rem; font-weight: 600; color: #555; margin-bottom: 8px; }
+input {
+    width: 100%; padding: 15px; border: 2px solid var(--border);
+    border-radius: 10px; font-size: 1rem; transition: 0.3s;
+    background: #fcfcfc;
+}
+input:focus { border-color: var(--primary); outline: none; background: #fff; }
+
+/* --- BOTÕES INTERATIVOS (STEP 2) --- */
+.question-label { font-size: 1rem; color: var(--dark); font-weight: 700; margin-bottom: 15px; display: block; }
+
+.options-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+
+.option-card {
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+    background: white;
+}
+.option-card i { display: block; font-size: 1.8rem; margin-bottom: 10px; color: #aaa; transition: 0.3s; }
+.option-card span { font-size: 0.9rem; font-weight: 600; color: #555; }
+
+.option-card:hover { border-color: var(--primary); transform: translateY(-3px); }
+.option-card.selected {
+    border-color: var(--primary);
+    background-color: rgba(65, 105, 225, 0.08);
+}
+.option-card.selected i { color: var(--primary); }
+.option-card.selected span { color: var(--primary); }
+
+/* --- STEP 3 ESTRUTURA --- */
+.info-badges { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+.badge-item { background: #f0f0f0; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
+.gym-photos-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+.gym-photos-grid img { width: 100%; border-radius: 8px; height: 100px; object-fit: cover; }
+.schedule-box { background: rgba(65,105,225, 0.1); padding: 20px; border-radius: 10px; border-left: 4px solid var(--primary); }
+.schedule-box h4 { margin-bottom: 10px; color: var(--primary); }
+
+/* --- PLANOS ROW --- */
+.plans-list { display: flex; flex-direction: column; gap: 15px; }
+.plan-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px; border: 2px solid var(--border); border-radius: 12px;
+    cursor: pointer; position: relative; transition: 0.3s;
+}
+.plan-row:hover { border-color: var(--primary); }
+.plan-row.selected { border-color: var(--accent); background: #f4fff4; box-shadow: 0 4px 12px rgba(50,205,50,0.2); }
+
+.plan-title { display: block; font-weight: 800; font-size: 1.1rem; }
+.plan-sub { font-size: 0.85rem; color: #777; }
+.plan-value { font-size: 1.4rem; font-weight: 800; color: var(--primary); }
+
+.discount-tag {
+    position: absolute; top: -10px; left: 20px; background: var(--highlight);
+    color: white; font-size: 0.75rem; font-weight: bold; padding: 3px 10px; border-radius: 4px;
+}
+.discount-tag.blue { background: var(--primary); }
+.discount-tag.gold { background: #FFD700; color: #000; }
+
+/* Botões */
+.actions { display: flex; justify-content: space-between; margin-top: 40px; align-items: center; }
+.actions.right { justify-content: flex-end; }
+
+button { padding: 15px 35px; border-radius: 8px; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; transition: 0.3s; }
+.btn-primary { background: var(--primary); color: white; box-shadow: 0 4px 15px rgba(65,105,225,0.3); }
+.btn-primary:hover { background: #3255c9; transform: translateY(-2px); }
+.btn-sec { background: transparent; color: #777; }
+.btn-sec:hover { color: var(--dark); }
+.btn-primary.full { width: 100%; margin-top: 20px; }
+
+/* --- LADO DIREITO: IMAGEM (40%) --- */
+.image-section {
+    width: 40%; /* Ajustado para 40% */
+    position: relative;
+    background: #000;
+    overflow: hidden;
+}
+
+.bg-image {
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    
+    /* MUDANÇA AQUI: de cover para contain */
+    background-size: contain; 
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    opacity: 0; 
+    transition: opacity 0.8s ease; /* Removi o transform para parar o efeito de zoom */
+    
+    /* Removi o transform: scale(1.1) que causava o zoom inicial */
+}
+
+.bg-image.active {
+    opacity: 0.6; 
+    z-index: 1;
+    /* Removi o transform: scale(1) */
+}
+
+.gym-photos-grid img {
+  .gym-photos-grid img {
+    width: 100%;
+    height: auto; /* Deixa a altura livre para seguir a proporção da foto */
+    aspect-ratio: 16 / 9; /* Força o formato horizontal de celular */
+    border-radius: 8px;
+    object-fit: cover; /* Agora o cover não dará zoom, pois a div e a foto têm o mesmo formato */
+    background: #eee;
+}
+}
+
+.overlay-text {
+    position: absolute; bottom: 50px; left: 40px; color: white; z-index: 5; max-width: 80%;
+}
+.overlay-text h3 { font-size: 3.5rem; font-weight: 900; line-height: 1; color: var(--accent); margin-bottom: 10px; }
+.overlay-text p { font-size: 1.2rem; opacity: 0.9; line-height: 1.4; }
+
+/* Ticket Sucesso */
+.success-content { text-align: center; padding-top: 30px; }
+.icon-circle { width: 90px; height: 90px; background: var(--accent); color: white; border-radius: 50%; font-size: 45px; line-height: 90px; margin: 0 auto 25px; }
+.ticket { background: #f8f8f8; padding: 25px; border-radius: 10px; margin: 30px 0; border: 1px dashed #ccc; }
+.ticket-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 1rem; }
+.ticket-total { border-top: 1px solid #ddd; margin-top: 15px; padding-top: 15px; font-size: 1.3rem; font-weight: 800; color: var(--primary); }
+#error-msg { color: #ff4757; text-align: right; display: none; font-size: 0.85rem; margin-bottom: 10px; font-weight: 600;}
+
+
+/* --- RESPONSIVIDADE (MOBILE) --- */
+@media (max-width: 900px) {
+    .main-wrapper {
+        flex-direction: column-reverse; /* Imagem em cima, form embaixo */
+        height: auto;
+        overflow: auto;
+    }
+
+    .form-section {
+        width: 100%;
+        padding: 30px 20px;
+        overflow: visible;
+    }
+
+    .image-section {
+        width: 100%;
+        height: 200px; /* Altura fixa para imagem no topo */
+    }
+
+    .bg-image { transform: none !important; } /* Desativa zoom animation no mobile */
+    .overlay-text { display: none; } /* Esconde texto da imagem no mobile para limpar a visão */
+    
+    .step-header h2 { font-size: 1.5rem; }
+    .options-grid { grid-template-columns: repeat(3, 1fr); gap: 5px; }
+    .option-card { padding: 10px 5px; }
+    .option-card i { font-size: 1.2rem; }
+    .option-card span { font-size: 0.75rem; }
+    
+    .gym-photos-grid { gap: 5px; }
+    .gym-photos-grid img { height: 80px; }
+}
+
+.sua-div-modalidade img {
+    width: 100%;
+    height: 100%;
+    
+    /* Faz a imagem se ajustar ao container sem zoom/corte */
+    object-fit: contain; 
+}
+
+/* Ajuste para grids com 4 itens (Objetivo) */
+.options-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); 
+    gap: 12px; 
+}
+
+/* Ajuste específico para quando queremos 3 colunas fixas (opcional, mas visualmente melhor) */
+.options-grid.col-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 600px) {
+    .options-grid.col-3 {
+        grid-template-columns: repeat(3, 1fr); /* Mantém 3 no mobile se couber, ou... */
+    }
+    .option-card {
+        padding: 15px 5px;
+        min-height: 90px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .option-card i {
+        font-size: 1.4rem;
+        margin-bottom: 5px;
+    }
+    .option-card span {
+        font-size: 0.75rem;
+        line-height: 1.2;
+    }
 }

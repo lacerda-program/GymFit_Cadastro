@@ -1,91 +1,122 @@
-document.addEventListener('DOMContentLoaded', () => {
-            const avancarBtn = document.getElementById('avancarBtn');
-            const finalizarBtn = document.getElementById('finalizarBtn');
-            const voltarBtn = document.getElementById('voltarBtn');
-            const formContainer = document.getElementById('formContainer');
-            const paymentContainer = document.getElementById('paymentContainer');
-            const welcomeContainer = document.getElementById('welcomeContainer');
-            const nomeInput = document.getElementById('nome');
-            const dataNascimentoInput = document.getElementById('data_nascimento');
-            const cpfInput = document.getElementById('cpf');
-            const telefoneInput = document.getElementById('telefone');
-            const valorInput = document.getElementById('valor');
-            const valorInfo = document.getElementById('valorInfo');
-            const planCards = document.querySelectorAll('.plan-card');
-            const userNameSpan = document.getElementById('userName');
+// Configuração
+const totalSteps = 5;
 
-            let nomeUsuario = '';
-            let planoSelecionado = null;
+// Atualiza a barra de progresso
+function updateProgress(step) {
+    const progressBar = document.getElementById('progressBar');
+    const percentage = (step / totalSteps) * 100;
+    progressBar.style.width = percentage + '%';
+}
 
-            // Valida a  idade
-            dataNascimentoInput.addEventListener('change', () => {
-                const data = new Date(dataNascimentoInput.value);
-                const hoje = new Date();
-                let idade = hoje.getFullYear() - data.getFullYear();
-                if (hoje.getMonth() < data.getMonth() || (hoje.getMonth() === data.getMonth() && hoje.getDate() < data.getDate())) idade--;
-                if (idade < 16) { alert('Você deve ter pelo menos 16 anos!'); dataNascimentoInput.value = ''; }
-            });
+// Lógica de Seleção de Opções (Botões)
+function selectOption(category, value, element) {
+    // 1. Identifica o container pai (para limpar a seleção visual apenas desse grupo)
+    const containerId = 'opt-' + (category === 'frequency' ? 'freq' : category); // Ajuste para mapear IDs
+    const container = element.parentElement;
+    
+    // 2. Remove a classe 'selected' de todos os irmãos
+    const siblings = container.getElementsByClassName('option-card');
+    for (let card of siblings) {
+        card.classList.remove('selected');
+    }
 
-            // verificar o cpf, só aceita numeros 
-            cpfInput.addEventListener('input', () => {
-                let cpf = cpfInput.value.replace(/\D/g, '');
-                if (cpf.length > 11) cpf = cpf.slice(0, 11);
-                cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-                cpfInput.value = cpf;
-            });
+    // 3. Adiciona 'selected' ao clicado
+    element.classList.add('selected');
 
-            // legitimar o numero de telefone, tem que ter 11 digitos
-            telefoneInput.addEventListener('input', () => {
-                let tel = telefoneInput.value.replace(/\D/g, '');
-                if (tel.length > 11) tel = tel.slice(0, 11);
-                if (tel.length >= 2) tel = `(${tel.slice(0, 2)}) ${tel.slice(2, 7)}-${tel.slice(7, 11)}`;
-                telefoneInput.value = tel;
-            });
+    // 4. Salva o valor no input hidden
+    document.getElementById(category).value = value;
+}
 
-            // aqui apenas avança para pagamento
-            avancarBtn.addEventListener('click', () => {
-                const inputs = document.querySelectorAll('#inscricaoForm input');
-                for (let i of inputs) if (i.value.trim() === '') { alert('Preencha todos os campos!'); return; }
-                nomeUsuario = nomeInput.value.trim();
-                formContainer.classList.remove('active');
-                paymentContainer.classList.add('active');
-            });
+// Navegação Próximo
+function nextStep(currentStep) {
+    // --- VALIDAÇÕES ---
+    
+    // Passo 1: Nome Obrigatório
+    if(currentStep === 1) {
+        const name = document.getElementById('name').value;
+        if(!name || name.length < 3) { 
+            alert("Por favor, digite seu nome completo."); 
+            return; 
+        }
+    }
 
-            // mostra os planos e deixa dinamico.
-            planCards.forEach(card => {
-                card.addEventListener('click', () => {
-                    // remove seleção anterior
-                    planCards.forEach(c => c.classList.remove('plan-selected'));
-                    card.classList.add('plan-selected');
+    // Passo 2: Validar Perguntas do Perfil
+    if(currentStep === 2) {
+        const goal = document.getElementById('goal').value;
+        const level = document.getElementById('level').value;
+        const frequency = document.getElementById('frequency').value;
+        const time = document.getElementById('time').value;
 
-                    // ppega valores dos planos ja faz a divisão e mostra a frente
-                    planoSelecionado = card.dataset.plano;
-                    const valorFull = Number(card.dataset.valorFull);
-                    const valorDesconto = Number(card.dataset.valorDesconto);
+        if(!goal || !level || !frequency || !time) {
+            alert("Por favor, responda todas as perguntas do perfil para montarmos seu treino.");
+            return;
+        }
+    }
 
-                    // atualiza o  campo valor e da um resumo
-                    valorInput.value = valorDesconto.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
-                    valorInfo.innerHTML = `Plano: <strong>${planoSelecionado}</strong><br>
-                               Valor cheio: R$ ${valorFull.toLocaleString('pt-BR')}<br>
-                               Valor com desconto: <strong>R$ ${valorDesconto.toLocaleString('pt-BR')}</strong>`;
-                });
-            });
+    // Passo 4: Validar Plano
+    if(currentStep === 4) {
+        const plan = document.getElementById('selectedPlanName').value;
+        if(!plan) {
+            document.getElementById('error-msg').style.display = 'block';
+            return;
+        }
+    }
 
+    // --- TRANSIÇÃO ---
 
-            // finaliza a inscrição levando para uma proxima page
-            finalizarBtn.addEventListener('click', () => {
-                if (!planoSelecionado) { alert('Selecione um plano!'); return; }
-                userNameSpan.textContent = nomeUsuario;
-                paymentContainer.classList.remove('active');
-                welcomeContainer.classList.add('active');
-            });
+    // 1. Oculta passo atual
+    document.getElementById(`step${currentStep}`).classList.remove('active');
+    
+    // 2. Mostra próximo passo
+    document.getElementById(`step${currentStep + 1}`).classList.add('active');
+    
+    // 3. Imagens (Slide Show)
+    document.querySelectorAll('.bg-image').forEach(img => img.classList.remove('active'));
+    const nextImg = document.getElementById(`img-step${currentStep + 1}`);
+    if(nextImg) nextImg.classList.add('active');
 
-            // volta ao formulario inicial e apaga os dados de antes 
-            voltarBtn.addEventListener('click', () => {
-                document.getElementById('inscricaoForm').reset();
-                valorInput.value = ''; valorInfo.textContent = ''; planoSelecionado = null;
-                planCards.forEach(c => c.classList.remove('plan-selected'));
-                welcomeContainer.classList.remove('active');
-                formContainer.classList.add('active');
-            });
-        });
+    // 4. Atualiza Barra
+    updateProgress(currentStep + 1);
+
+    // 5. Scroll para o topo do form (UX)
+    document.querySelector('.form-section').scrollTop = 0;
+}
+
+// Navegação Voltar
+function prevStep(currentStep) {
+    document.getElementById(`step${currentStep}`).classList.remove('active');
+    document.getElementById(`step${currentStep - 1}`).classList.add('active');
+    
+    // Imagens
+    document.querySelectorAll('.bg-image').forEach(img => img.classList.remove('active'));
+    document.getElementById(`img-step${currentStep - 1}`).classList.add('active');
+
+    updateProgress(currentStep - 1);
+}
+
+// Seleção de Planos (Passo 4)
+function selectPlan(name, price, element) {
+    document.querySelectorAll('.plan-row').forEach(row => row.classList.remove('selected'));
+    element.classList.add('selected');
+
+    document.getElementById('selectedPlanName').value = name;
+    document.getElementById('selectedPlanPrice').value = price;
+    document.getElementById('error-msg').style.display = 'none';
+}
+
+// Finalização
+function finishRegistration() {
+    nextStep(4); // Vai para o passo 5 (Sucesso)
+    
+    const name = document.getElementById('name').value;
+    const plan = document.getElementById('selectedPlanName').value;
+    const price = document.getElementById('selectedPlanPrice').value;
+
+    document.getElementById('finalName').innerText = name;
+    document.getElementById('finalPlan').innerText = plan;
+    document.getElementById('finalPrice').innerText = parseFloat(price).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
+    
+}
+
+// Inicializa barra
+updateProgress(1);

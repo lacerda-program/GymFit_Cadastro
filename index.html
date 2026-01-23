@@ -4,94 +4,308 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscrição Academia GymFit</title>
+    <title>Gym-Fit | Inscrição</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 
 <body>
 
-    <!-- Parte de formulario -->
-    <div class="form-container active" id="formContainer">
-        <h1>Formulário de Inscrição GymFit</h1>
-        <form id="inscricaoForm">
-            <label for="nome">Nome Completo:</label>
-            <input type="text" id="nome" required>
+    <div class="main-wrapper">
 
-            <label for="data_nascimento">Data de Nascimento:</label>
-            <input type="date" id="data_nascimento" required>
+        <div class="form-section">
+            <header>
+                <h1 class="logo">GYM<span class="highlight">-FIT</span></h1>
+                <div class="progress-container">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+            </header>
 
-            <label for="cpf">CPF:</label>
-            <input type="text" id="cpf" placeholder="000.000.000-00" required>
+            <form id="gymForm" onsubmit="return false;">
 
-            <label for="telefone">Telefone:</label>
-            <input type="text" id="telefone" placeholder="(xx) xxxxx-xxxx" required>
+                <div class="step active" id="step1">
+                    <div class="step-header">
+                        <h2>Vamos começar</h2>
+                        <p>Crie sua conta para acessar a melhor estrutura de Conquista.</p>
+                    </div>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" placeholder="exemplo@dominio.com" required>
+                    <div class="input-group">
+                        <label>Nome Completo</label>
+                        <input type="text" id="name" placeholder="Ex: João Silva" required>
+                    </div>
 
-            <label for="endereco">Endereço:</label>
-            <input type="text" id="endereco" required>
+                    <div class="grid-2">
+                        <div class="input-group">
+                            <label>CPF</label>
+                            <input type="text" id="cpf" placeholder="000.000.000-00">
+                        </div>
+                        <div class="input-group">
+                            <label>Celular</label>
+                            <input type="tel" id="phone" placeholder="(77) 99999-9999">
+                        </div>
+                    </div>
 
-            <label for="bairro">Bairro:</label>
-            <input type="text" id="bairro" required>
+                    <div class="input-group">
+                        <label>E-mail</label>
+                        <input type="email" id="email" placeholder="seu@email.com">
+                    </div>
 
-            <label for="cidade">Cidade:</label>
-            <input type="text" id="cidade" required>
+                    <div class="grid-2">
+                        <div class="input-group">
+                            <label>Bairro</label>
+                            <input type="text" id="neighborhood" placeholder="Ex: Boa Vista">
+                        </div>
+                        <div class="input-group">
+                            <label>Cidade</label>
+                            <input type="text" value="Vitória da Conquista" readonly style="opacity: 0.7;">
+                        </div>
+                    </div>
 
-            <label for="estado">Estado:</label>
-            <input type="text" id="estado" required>
+                    <div class="actions right">
+                        <button class="btn-primary" onclick="nextStep(1)">Continuar <i
+                                class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
 
-            <label for="cep">CEP:</label>
-            <input type="text" id="cep" placeholder="00000-000" required>
+                <div class="step" id="step2">
+                    <div class="step-header">
+                        <h2>Seu Perfil</h2>
+                        <p>Responda para personalizarmos seu treino.</p>
+                    </div>
 
-            <button type="button" id="avancarBtn">Avançar para Pagamento</button>
-        </form>
+                    <label class="question-label">1. Qual seu principal objetivo?</label>
+                    <div class="options-grid" id="opt-goal">
+                        <div class="option-card" onclick="selectOption('goal', 'Hipertrofia', this)">
+                            <i class="fas fa-dumbbell"></i>
+                            <span>Massa Muscular</span>
+                        </div>
+                        <div class="option-card" onclick="selectOption('goal', 'Emagrecimento', this)">
+                            <i class="fas fa-fire-alt"></i>
+                            <span>Perder Peso</span>
+                        </div>
+                        <div class="option-card" onclick="selectOption('goal', 'Saude', this)">
+                            <i class="fas fa-heartbeat"></i>
+                            <span>Saúde/Postura</span>
+                        </div>
+                        <div class="option-card" onclick="selectOption('goal', 'Condicionamento', this)">
+                            <i class="fas fa-running"></i>
+                            <span>Resistência</span>
+                        </div>
+                    </div>
+                    <input type="hidden" id="goal">
+
+                    <label class="question-label" style="margin-top: 25px;">2. Qual seu nível de experiência?</label>
+                    <div class="options-grid col-3" id="opt-level">
+                        <div class="option-card" onclick="selectOption('level', 'Iniciante', this)">
+                            <i class="fas fa-seedling"></i>
+                            <span>Nunca treinei</span>
+                        </div>
+                        <div class="option-card" onclick="selectOption('level', 'Intermediario', this)">
+                            <i class="fas fa-walking"></i>
+                            <span>Treino às vezes</span>
+                        </div>
+                        <div class="option-card" onclick="selectOption('level', 'Avancado', this)">
+                            <i class="fas fa-medal"></i>
+                            <span>Sou atleta</span>
+                        </div>
+                    </div>
+                    <input type="hidden" id="level">
+
+                    <label class="question-label" style="margin-top: 25px;">3. Quantas vezes pretende vir?</label>
+                    <div class="options-grid col-3" id="opt-freq">
+                        <div class="option-card" onclick="selectOption('frequency', '1-2x', this)">
+                            <span>1 a 2 vezes</span>
+                        </div>
+                        <div class="option-card" onclick="selectOption('frequency', '3-5x', this)">
+                            <span>3 a 5 vezes</span>
+                        </div>
+                        <div class="option-card" onclick="selectOption('frequency', '5x+', this)">
+                            <span>Todos os dias</span>
+                        </div>
+                    </div>
+                    <input type="hidden" id="frequency">
+
+                    <label class="question-label" style="margin-top: 25px;">4. Qual seu horário preferido?</label>
+                    <div class="options-grid col-3" id="opt-time">
+                        <div class="option-card" onclick="selectOption('time', 'Manha', this)">
+                            <i class="fas fa-sun"></i>
+                            <span>Manhã</span>
+                        </div>
+                        <div class="option-card" onclick="selectOption('time', 'Tarde', this)">
+                            <i class="fas fa-cloud-sun"></i>
+                            <span>Tarde</span>
+                        </div>
+                        <div class="option-card" onclick="selectOption('time', 'Noite', this)">
+                            <i class="fas fa-moon"></i>
+                            <span>Noite</span>
+                        </div>
+                    </div>
+                    <input type="hidden" id="time">
+
+                    <label class="question-label" style="margin-top: 25px;">5. Medidas Aproximadas</label>
+                    <div class="grid-2">
+                        <div class="input-group">
+                            <label>Peso (kg)</label>
+                            <input type="number" id="weight" placeholder="Ex: 70kg">
+                        </div>
+                        <div class="input-group">
+                            <label>Altura (cm)</label>
+                            <input type="number" id="height" placeholder="Ex: 175cm">
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <button class="btn-sec" onclick="prevStep(2)">Voltar</button>
+                        <button class="btn-primary" onclick="nextStep(2)">Próximo</button>
+                    </div>
+                </div>
+                <div class="step" id="step3">
+                    <div class="step-header">
+                        <h2>Gym-Fit Boa Vista</h2>
+                        <p>Av. J.Pedral, 705 - Vitória da Conquista</p>
+                        <p>Perto de Condominios Residenciais</p>
+                    </div>
+
+                    <div class="info-badges">
+                        <div class="badge-item">🚗 Estacionamento Grátis</div>
+                        <div class="badge-item">❄️ 100% Climatizada</div>
+                        <div class="badge-item">🚿 Vestiários Premium</div>
+                        <div class="badge-item">🏋️🥬 Treinos e Dietas personalizados</div>
+                        <div class="badge-item">🏋️ Personais prontos para atendimento</div>
+                        <div class="badge-item">🏋️ Aparelhos de ultima tecnologia</div>
+                        <div class="badge-item">🥋 Aulas de Jiu-Jitsu</div>
+                        <div class="badge-item">🥊 Aulas de Muay Thai</div>
+                        <div class="badge-item">💪🏻  Suplementos Pre-Treino, whey</div>
+                    </div>
+
+                    <div class="gym-photos-grid">
+                        <img src="images/musculação.jpg" alt="Musculação">
+                        <img src="images/jiu-jitsu.jpg" alt="Jiu-Jitsu">
+                        <img src="images/cardio.jpg" alt="Dança">
+                    </div>
+
+                    <div class="schedule-box">
+                        <h4><i class="far fa-clock"></i> Horário de Treino</h4>
+                        <p>Seg a Sex: <strong>05:00 às 23:00</strong></p>
+                        <p>Sábados: <strong>08:00 às 18:00</strong></p>
+                        <p>Domingos: <strong>08:00 às 13:00</strong></p>
+                    </div>
+
+                    <div class="actions">
+                        <button class="btn-sec" onclick="prevStep(3)">Voltar</button>
+                        <button class="btn-primary" onclick="nextStep(3)">Ver Planos</button>
+                    </div>
+                </div>
+                
+                <div class="step" id="step4">
+                    <div class="step-header">
+                        <h2>Escolha seu Plano</h2>
+                        <p>Comece hoje sem taxa de matrícula.</p>
+                    </div>
+
+                    <div class="plans-list">
+                        <div class="plan-row" onclick="selectPlan('Mensal', 200, this)">
+                            <div class="plan-info">
+                                <span class="plan-title">Mensal</span>
+                                <span class="plan-sub">Flexibilidade total</span>
+                            </div>
+                            <div class="plan-value">R$ 200</div>
+                        </div>
+
+                        <div class="plan-row recommended" onclick="selectPlan('Trimestral', 540, this)">
+                            <div class="discount-tag">-10%</div>
+                            <div class="plan-info">
+                                <span class="plan-title">Trimestral</span>
+                                <span class="plan-sub">Equivalente a R$ 180/mês</span>
+                            </div>
+                            <div class="plan-value">R$ 540</div>
+                        </div>
+
+                        <div class="plan-row" onclick="selectPlan('Semestral', 1020, this)">
+                            <div class="discount-tag blue">-15%</div>
+                            <div class="plan-info">
+                                <span class="plan-title">Semestral</span>
+                                <span class="plan-sub">Equivalente a R$ 170/mês</span>
+                            </div>
+                            <div class="plan-value">R$ 1.020</div>
+                        </div>
+
+                        <div class="plan-row" onclick="selectPlan('Anual', 1920, this)">
+                            <div class="discount-tag gold">-20%</div>
+                            <div class="plan-info">
+                                <span class="plan-title">Anual</span>
+                                <span class="plan-sub">Melhor custo-benefício</span>
+                            </div>
+                            <div class="plan-value">R$ 1.920</div>
+                        </div>
+                    </div>
+
+                    <input type="hidden" id="selectedPlanName">
+                    <input type="hidden" id="selectedPlanPrice">
+                    <p id="error-msg">Selecione um plano acima.</p>
+
+                    <div class="actions">
+                        <button class="btn-sec" onclick="prevStep(4)">Voltar</button>
+                        <button class="btn-primary" onclick="finishRegistration()">Finalizar</button>
+                    </div>
+                </div>
+
+                <div class="step" id="step5">
+                    <div class="success-content">
+                        <div class="icon-circle"><i class="fas fa-check"></i></div>
+                        <h2>Bem-vindo(a)!</h2>
+                        <p>Sua inscrição na <strong>Gym-Fit</strong> foi confirmada. Bem vindo a familia!</p>
+
+                        <div class="ticket">
+                            <div class="ticket-row">
+                                <span>Aluno:</span>
+                                <strong id="finalName">Nome</strong>
+                            </div>
+                            <div class="ticket-row">
+                                <span>Plano:</span>
+                                <strong id="finalPlan">Anual</strong>
+                            </div>
+                            <div class="ticket-total">
+                                Total: <span id="finalPrice">R$ 0,00</span>
+                            </div>
+                        </div>
+
+                        <button class="btn-primary full" onclick="location.reload()">Novo Cadastro</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="image-section">
+            <div class="bg-image active" id="img-step1" >
+                <img src="images/frente da academia.png" alt="Bem vindo a Gym-Fit">
+            </div>
+
+            <div class="bg-image" id="img-step2">
+                <img src="images/area-de-musculacao.png" alt="Foco e resultado">
+            </div>
+
+            <div class="bg-image" id="img-step3">
+                <img src="images/frente da academia.png" alt="Fachada com estacionamento">
+            </div>
+
+            <div class="bg-image" id="img-step4">
+                <img src="images/treino-da academia.png" alt="invista em voce">
+            </div>
+
+            <div class="bg-image" id="img-step5">
+                <img src="images/welcome.jpg" alt="Bem vindo a familia">
+            </div>
+
+            <div class="overlay-text">
+                <h3>GYM-FIT</h3>
+                <p>Transforme seu corpo, mude sua vida.</p>
+            </div>
+        </div>
+
     </div>
 
-    <!-- parte de pagamento -->
-    <div class="payment-container" id="paymentContainer">
-        <h1>Pagamento</h1>
-        <label for="tipo_pagamento">Forma de Pagamento:</label>
-        <select id="tipo_pagamento">
-            <option value="pix">Pix</option>
-            <option value="dinheiro">Débito</option>
-             <option value="pix">Crédito</option>
-        </select>
-
-        <h3>Escolha seu plano:</h3>
-        <div class="plan-card" data-plano="mensal" data-valor-full="200" data-valor-desconto="200">
-            Mensal<br>
-            Valor: R$ 200,00
-        </div>
-        <div class="plan-card" data-plano="trimestral" data-valor-full="600" data-valor-desconto="540">
-            Trimestral<br>
-            Valor cheio: R$ 600,00<br>
-            Com desconto: R$ 540,00
-        </div>
-        <div class="plan-card" data-plano="semestral" data-valor-full="1200" data-valor-desconto="960">
-            Semestral<br>
-            Valor cheio: R$ 1200,00<br>
-            Com desconto: R$ 960,00
-        </div>
-        <div class="plan-card" data-plano="anual" data-valor-full="2400" data-valor-desconto="1680">
-            Anual<br>
-            Valor cheio: R$ 2400,00<br>
-            Com desconto: R$ 1680,00
-        </div>
-        
-        <div id="valorInfo"></div>
-        <input type="text" id="valor" readonly placeholder="Valor a se pagar">
-        <button type="button" id="finalizarBtn">Finalizar Inscrição</button>
-    </div>
-
-    <!-- Bem Vindo -->
-    <div class="welcome-container" id="welcomeContainer">
-        <h1>Seja bem-vindo, <span id="userName"></span>!</h1>
-        <p>Nosso mais novo membro da academia GymFit. </p>
-        <p>Em breve entraremos em contato para mais informações.</p>
-        <button type="button" id="voltarBtn">Voltar ao Formulário</button>
-    </div>
     <script src="script.js"></script>
-
 </body>
+
 </html>
