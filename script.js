@@ -13,7 +13,7 @@ function selectOption(category, value, element) {
     // 1. Identifica o container pai (para limpar a seleção visual apenas desse grupo)
     const containerId = 'opt-' + (category === 'frequency' ? 'freq' : category); // Ajuste para mapear IDs
     const container = element.parentElement;
-    
+
     // 2. Remove a classe 'selected' de todos os irmãos
     const siblings = container.getElementsByClassName('option-card');
     for (let card of siblings) {
@@ -30,33 +30,33 @@ function selectOption(category, value, element) {
 // Navegação Próximo
 function nextStep(currentStep) {
     // --- VALIDAÇÕES ---
-    
+
     // Passo 1: Nome Obrigatório
-    if(currentStep === 1) {
+    if (currentStep === 1) {
         const name = document.getElementById('name').value;
-        if(!name || name.length < 3) { 
-            alert("Por favor, digite seu nome completo."); 
-            return; 
+        if (!name || name.length < 3) {
+            alert("Por favor, digite seu nome completo.");
+            return;
         }
     }
 
     // Passo 2: Validar Perguntas do Perfil
-    if(currentStep === 2) {
+    if (currentStep === 2) {
         const goal = document.getElementById('goal').value;
         const level = document.getElementById('level').value;
         const frequency = document.getElementById('frequency').value;
         const time = document.getElementById('time').value;
 
-        if(!goal || !level || !frequency || !time) {
+        if (!goal || !level || !frequency || !time) {
             alert("Por favor, responda todas as perguntas do perfil para montarmos seu treino.");
             return;
         }
     }
 
     // Passo 4: Validar Plano
-    if(currentStep === 4) {
+    if (currentStep === 4) {
         const plan = document.getElementById('selectedPlanName').value;
-        if(!plan) {
+        if (!plan) {
             document.getElementById('error-msg').style.display = 'block';
             return;
         }
@@ -66,14 +66,14 @@ function nextStep(currentStep) {
 
     // 1. Oculta passo atual
     document.getElementById(`step${currentStep}`).classList.remove('active');
-    
+
     // 2. Mostra próximo passo
     document.getElementById(`step${currentStep + 1}`).classList.add('active');
-    
+
     // 3. Imagens (Slide Show)
     document.querySelectorAll('.bg-image').forEach(img => img.classList.remove('active'));
     const nextImg = document.getElementById(`img-step${currentStep + 1}`);
-    if(nextImg) nextImg.classList.add('active');
+    if (nextImg) nextImg.classList.add('active');
 
     // 4. Atualiza Barra
     updateProgress(currentStep + 1);
@@ -86,7 +86,7 @@ function nextStep(currentStep) {
 function prevStep(currentStep) {
     document.getElementById(`step${currentStep}`).classList.remove('active');
     document.getElementById(`step${currentStep - 1}`).classList.add('active');
-    
+
     // Imagens
     document.querySelectorAll('.bg-image').forEach(img => img.classList.remove('active'));
     document.getElementById(`img-step${currentStep - 1}`).classList.add('active');
@@ -103,19 +103,29 @@ function selectPlan(name, price, element) {
     document.getElementById('selectedPlanPrice').value = price;
     document.getElementById('error-msg').style.display = 'none';
 }
+document.querySelectorAll('input[name="pay_method"]').forEach((input) => {
+    input.addEventListener('change', function () {
+        const alertBox = document.getElementById('cash-alert');
+        if (this.value === 'cash') {
+            alertBox.style.display = 'flex';
+        } else {
+            alertBox.style.display = 'none';
+        }
+    });
+});
 
 // Finalização
 function finishRegistration() {
     nextStep(4); // Vai para o passo 5 (Sucesso)
-    
+
     const name = document.getElementById('name').value;
     const plan = document.getElementById('selectedPlanName').value;
     const price = document.getElementById('selectedPlanPrice').value;
 
     document.getElementById('finalName').innerText = name;
     document.getElementById('finalPlan').innerText = plan;
-    document.getElementById('finalPrice').innerText = parseFloat(price).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
-    
+    document.getElementById('finalPrice').innerText = parseFloat(price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
 }
 
 // Inicializa barra
