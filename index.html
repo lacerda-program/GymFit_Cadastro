@@ -175,7 +175,7 @@
                         <div class="badge-item">🏋️ Aparelhos de ultima tecnologia</div>
                         <div class="badge-item">🥋 Aulas de Jiu-Jitsu</div>
                         <div class="badge-item">🥊 Aulas de Muay Thai</div>
-                        <div class="badge-item">💪🏻  Suplementos Pre-Treino, whey</div>
+                        <div class="badge-item">💪🏻 Suplementos Pre-Treino, whey</div>
                     </div>
 
                     <div class="gym-photos-grid">
@@ -196,11 +196,46 @@
                         <button class="btn-primary" onclick="nextStep(3)">Ver Planos</button>
                     </div>
                 </div>
-                
+
                 <div class="step" id="step4">
                     <div class="step-header">
                         <h2>Escolha seu Plano</h2>
                         <p>Comece hoje sem taxa de matrícula.</p>
+                    </div>
+                    <div class="payment-section">
+                        <span class="question-label">Escolha como deseja pagar:</span>
+                        <div class="payment-options-grid">
+                            <label class="payment-card">
+                                <input type="radio" name="pay_method" value="pix" checked>
+                                <div class="payment-design">
+                                    <i class="fas fa-pix"></i>
+                                    <span>Pix</span>
+                                </div>
+                            </label>
+
+                            <label class="payment-card">
+                                <input type="radio" name="pay_method" value="card">
+                                <div class="payment-design">
+                                    <i class="fas fa-credit-card"></i>
+                                    <span>Cartão</span>
+                                    <small>Crédito/Débito</small>
+                                </div>
+                            </label>
+
+                            <label class="payment-card money-option">
+                                <input type="radio" name="pay_method" value="cash">
+                                <div class="payment-design">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                    <span>Dinheiro</span>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div id="cash-alert" class="info-box-alert">
+                            <i class="fas fa-info-circle"></i>
+                            <p>Para pagamento em espécie, finalize o cadastro e apresente-se na <strong>recepção da
+                                    academia</strong>, em até 48hrs para realizar o pagamento e liberar seu acesso.</p>
+                        </div>
                     </div>
 
                     <div class="plans-list">
@@ -277,7 +312,7 @@
         </div>
 
         <div class="image-section">
-            <div class="bg-image active" id="img-step1" >
+            <div class="bg-image active" id="img-step1">
                 <img src="images/frente da academia.png" alt="Bem vindo a Gym-Fit">
             </div>
 
