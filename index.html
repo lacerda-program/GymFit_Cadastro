@@ -26,7 +26,7 @@
                 <div class="step active" id="step1">
                     <div class="step-header">
                         <h2>Vamos começar</h2>
-                        <p>Crie sua conta para acessar a melhor estrutura de Conquista.</p>
+                        <p>Crie sua conta para acessar a melhor estrutura de Academias em Vitória da Conquista.</p>
                     </div>
 
                     <div class="input-group">
@@ -202,7 +202,7 @@
                         <h2>Escolha seu Plano</h2>
                         <p>Comece hoje sem taxa de matrícula.</p>
                     </div>
-                      <div class="payment-section">
+                         <div class="payment-section">
                         <span class="question-label">Escolha como deseja pagar:</span>
                         <div class="payment-options-grid">
                             <label class="payment-card">
@@ -212,6 +212,24 @@
                                     <span>Pix</span>
                                 </div>
                             </label>
+
+                            <label class="payment-card">
+                                <input type="radio" name="pay_method" value="card">
+                                <div class="payment-design">
+                                    <i class="fas fa-credit-card"></i>
+                                    <span>Cartão</span>
+                                    <small>Crédito/Débito</small>
+                                </div>
+                            </label>
+
+                            <label class="payment-card money-option">
+                                <input type="radio" name="pay_method" value="cash">
+                                <div class="payment-design">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                    <span>Dinheiro</span>
+                                </div>
+                            </label>
+                        </div>
 
                     <div class="plans-list">
                         <div class="plan-row" onclick="selectPlan('Mensal', 200, this)">
