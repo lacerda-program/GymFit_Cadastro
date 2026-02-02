@@ -1,633 +1,109 @@
 :root {
     --primary: #4169E1;
-    /* Azul Royal */
-    --accent: #32CD32;
-    /* Verde Limão */
-    --highlight: #FFA500;
-    /* Laranja */
-    --dark: #1a1a1a;
-    --gray: #f4f6f8;
-    --text: #333;
-    --border: #ddd;
+    --gold: #FFD700;
+    --blue-tag: #00BFFF;
+    --dark: #121212;
+    --border: #e8e8e8;
 }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+body { height: 100vh; background: #fff; overflow: hidden; }
 
-body {
-    height: 100vh;
-    overflow: hidden;
-    background: #fff;
-}
+.main-wrapper { display: flex; height: 100vh; }
 
-.main-wrapper {
-    display: flex;
-    height: 100%;
-    width: 100%;
-}
+/* Form Area */
+.form-section { width: 60%; padding: 40px 8%; overflow-y: auto; background: #fff; }
+.logo { font-weight: 800; color: var(--dark); margin-bottom: 10px; }
+.highlight { color: var(--primary); }
 
-/* --- LADO ESQUERDO: FORMULÁRIO (60%) --- */
-.form-section {
-    width: 60%;
-    /* Ajustado para 60% */
-    padding: 40px 80px;
-    /* Aumentei um pouco o padding lateral */
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    background: #fff;
-    position: relative;
-    z-index: 2;
-}
+/* Steps Navigation */
+.step { display: none; }
+.step.active { display: block; animation: slideUp 0.4s ease forwards; }
+@keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-header {
-    margin-bottom: 30px;
-}
+/* Progress Bar */
+.progress-container { width: 100%; height: 6px; background: #eee; border-radius: 10px; margin: 20px 0 40px; }
+.progress-bar { height: 100%; width: 20%; background: var(--primary); transition: 0.5s; border-radius: 10px; }
 
-.logo {
-    font-size: 1.8rem;
-    font-weight: 800;
-    letter-spacing: -1px;
-    color: var(--dark);
-}
+/* Grid and Inputs */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.input-group { margin-bottom: 20px; }
+.input-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #444; font-size: 0.9rem; }
+.input-group input { width: 100%; padding: 14px; border: 1px solid var(--border); border-radius: 10px; font-size: 1rem; }
 
-.highlight {
-    color: var(--primary);
-}
-
-/* Barra de Progresso */
-.progress-container {
-    width: 100%;
-    height: 4px;
-    background: #eee;
-    margin-top: 15px;
-    border-radius: 2px;
-}
-
-.progress-bar {
-    height: 100%;
-    background: var(--primary);
-    width: 20%;
-    transition: width 0.5s ease;
-    border-radius: 2px;
-}
-
-/* Passos e Animações */
-.step {
-    display: none;
-    animation: fadeInUp 0.6s ease;
-}
-
-.step.active {
-    display: block;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.step-header h2 {
-    font-size: 2rem;
-    margin-bottom: 5px;
-    color: var(--dark);
-}
-
-.step-header p {
-    color: #777;
-    margin-bottom: 30px;
-}
-
-/* Inputs e Labels */
-.input-group {
-    margin-bottom: 20px;
-}
-
-.grid-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
-
-label {
-    display: block;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #555;
-    margin-bottom: 8px;
-}
-
-input {
-    width: 100%;
-    padding: 15px;
-    border: 2px solid var(--border);
-    border-radius: 10px;
-    font-size: 1rem;
-    transition: 0.3s;
-    background: #fcfcfc;
-}
-
-input:focus {
-    border-color: var(--primary);
-    outline: none;
-    background: #fff;
-}
-
-/* --- BOTÕES INTERATIVOS (STEP 2) --- */
-.question-label {
-    font-size: 1rem;
-    color: var(--dark);
-    font-weight: 700;
-    margin-bottom: 15px;
-    display: block;
-}
-
-.options-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-}
+/* Options Grid (Objetivos, Experiência, etc) */
+.options-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 10px; }
+.options-grid.col-3 { grid-template-columns: repeat(3, 1fr); }
 
 .option-card {
-    border: 2px solid var(--border);
-    border-radius: 12px;
-    padding: 20px 10px;
-    text-align: center;
-    cursor: pointer;
-    transition: 0.3s;
-    background: white;
+    border: 2px solid #f0f0f0; padding: 15px; border-radius: 12px;
+    text-align: center; cursor: pointer; transition: 0.3s; display: flex; flex-direction: column; align-items: center; gap: 8px;
 }
+.option-card i { font-size: 1.2rem; color: var(--primary); }
+.option-card span { font-size: 0.85rem; font-weight: 500; }
+.option-card.selected { border-color: var(--primary); background: #f0f4ff; }
 
-.option-card i {
-    display: block;
-    font-size: 1.8rem;
-    margin-bottom: 10px;
-    color: #aaa;
-    transition: 0.3s;
-}
+/* Step 3 - Badges e Galeria */
+.info-badges { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0; }
+.badge-item { background: #f0f2f5; padding: 6px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; color: #555; border: 1px solid #e0e0e0; }
+.gym-photos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0; }
+.gym-photos-grid img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 10px; }
+.schedule-box { background: #f9f9f9; padding: 20px; border-radius: 12px; border-left: 4px solid var(--primary); margin-bottom: 20px; }
 
-.option-card span {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: #555;
-}
+/* Step 4 - Pagamento e Planos */
+.payment-options-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 15px 0; }
+.payment-card input { display: none; }
+.payment-design { border: 2px solid #f0f0f0; padding: 15px; border-radius: 12px; text-align: center; cursor: pointer; transition: 0.3s; height: 100%; }
+.payment-card input:checked + .payment-design { border-color: var(--primary); background: #f0f4ff; }
+.info-box-alert { display: none; background: #fff8e1; color: #b78103; padding: 15px; border-radius: 10px; font-size: 0.85rem; margin-top: 15px; border: 1px solid #ffe082; }
 
-.option-card:hover {
-    border-color: var(--primary);
-    transform: translateY(-3px);
-}
+.plan-row { border: 1px solid #eee; padding: 18px; border-radius: 12px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; position: relative; }
+.plan-row.selected { border: 2px solid var(--primary); background: #f0f4ff; }
+.discount-tag { position: absolute; top: -10px; left: 15px; background: #FF4500; color: white; padding: 2px 8px; border-radius: 5px; font-size: 0.7rem; font-weight: 800; }
+.discount-tag.gold { background: var(--gold); color: #000; }
+.discount-tag.blue { background: var(--blue-tag); }
 
-.option-card.selected {
-    border-color: var(--primary);
-    background-color: rgba(65, 105, 225, 0.08);
-}
-
-.option-card.selected i {
-    color: var(--primary);
-}
-
-.option-card.selected span {
-    color: var(--primary);
-}
-
-/* --- STEP 3 ESTRUTURA --- */
-.info-badges {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-}
-
-.badge-item {
-    background: #f0f0f0;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 600;
-}
-
-.gym-photos-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.gym-photos-grid img {
-    width: 100%;
-    border-radius: 8px;
-    height: 100px;
-    object-fit: cover;
-}
-
-.schedule-box {
-    background: rgba(65, 105, 225, 0.1);
-    padding: 20px;
-    border-radius: 10px;
-    border-left: 4px solid var(--primary);
-}
-
-.schedule-box h4 {
-    margin-bottom: 10px;
-    color: var(--primary);
-}
-
-/* --- PLANOS ROW --- */
-.payment-options-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-bottom: 20px;
-}
-
-.payment-card input {
-    display: none;
-}
-
-.payment-design {
-    border: 2px solid var(--border);
-    border-radius: 12px;
-    padding: 15px 5px;
-    text-align: center;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.payment-card input:checked+.payment-design {
-    border-color: var(--primary);
-    background: rgba(65, 105, 225, 0.05);
-    color: var(--primary);
-}
-
-.info-box-alert {
-    display: none;
-    /* Escondido até ser selecionado */
-    background: #fff4e5;
-    border-left: 4px solid var(--highlight);
-    padding: 15px;
-    border-radius: 8px;
-    font-size: 0.85rem;
-    color: #856404;
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    margin-top: 15px;
-}
-
-.info-box-alert i {
-    margin-top: 3px;
-}
-
-.plans-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
+video/* Estado inicial do Plano */
 .plan-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    border: 2px solid var(--border);
-    border-radius: 12px;
+    border: 2px solid #eee; /* Borda padrão */
+    transition: all 0.3s ease;
     cursor: pointer;
-    position: relative;
-    transition: 0.3s;
 }
 
+/* Hover: Borda Verde ao passar o mouse */
 .plan-row:hover {
-    border-color: var(--primary);
+    border-color: #32CD32; /* Verde Lima/Forte */
+    transform: translateY(-2px); /* Leve efeito de flutuar */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
+/* Selecionado: Borda Azul */
 .plan-row.selected {
-    border-color: var(--accent);
-    background: #f4fff4;
-    box-shadow: 0 4px 12px rgba(50, 205, 50, 0.2);
+    border-color: var(--primary) !important; /* Azul */
+    background-color: #f0f4ff;
 }
 
-.plan-title {
-    display: block;
-    font-weight: 800;
-    font-size: 1.1rem;
+/* Garantir que o hover não mude a cor se já estiver selecionado azul */
+.plan-row.selected:hover {
+    border-color: var(--primary) !important;
 }
 
-.plan-sub {
-    font-size: 0.85rem;
-    color: #777;
-}
+/* Imagem Lateral */
+.image-section { width: 40%; position: relative; background: #000; }
+.bg-image { position: absolute; width: 100%; height: 100%; opacity: 0; transition: 1s ease; }
+.bg-image.active { opacity: 0.6; }
+.bg-image img { width: 100%; height: 100%; object-fit: cover; }
+.overlay-text { position: absolute; bottom: 10%; left: 10%; color: white; z-index: 10; }
 
-.plan-value {
-    font-size: 1.4rem;
-    font-weight: 800;
-    color: var(--primary);
-}
+/* Final Success */
+.success-content { text-align: center; padding: 30px 0; }
+.icon-circle { width: 70px; height: 70px; background: #32CD32; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 2rem; }
+.ticket { background: #f8f9fa; padding: 20px; border-radius: 15px; margin: 20px 0; border: 1px dashed #ccc; }
+.ticket-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9rem; }
+.ticket-total { border-top: 1px solid #ddd; padding-top: 10px; font-weight: 800; color: var(--primary); font-size: 1.1rem; }
 
-.discount-tag {
-    position: absolute;
-    top: -10px;
-    left: 20px;
-    background: var(--highlight);
-    color: white;
-    font-size: 0.75rem;
-    font-weight: bold;
-    padding: 3px 10px;
-    border-radius: 4px;
-}
-
-.discount-tag.blue {
-    background: var(--primary);
-}
-
-.discount-tag.gold {
-    background: #FFD700;
-    color: #000;
-}
-
-/* Botões */
-.actions {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 40px;
-    align-items: center;
-}
-
-.actions.right {
-    justify-content: flex-end;
-}
-
-button {
-    padding: 15px 35px;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    border: none;
-    font-size: 1rem;
-    transition: 0.3s;
-}
-
-.btn-primary {
-    background: var(--primary);
-    color: white;
-    box-shadow: 0 4px 15px rgba(65, 105, 225, 0.3);
-}
-
-.btn-primary:hover {
-    background: #3255c9;
-    transform: translateY(-2px);
-}
-
-.btn-sec {
-    background: transparent;
-    color: #777;
-}
-
-.btn-sec:hover {
-    color: var(--dark);
-}
-
-.btn-primary.full {
-    width: 100%;
-    margin-top: 20px;
-}
-
-/* --- LADO DIREITO: IMAGEM (40%) --- */
-.image-section {
-    width: 40%;
-    /* Ajustado para 40% */
-    position: relative;
-    background: #000;
-    overflow: hidden;
-}
-
-.bg-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-
-    /* MUDANÇA AQUI: de cover para contain */
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-
-    opacity: 0;
-    transition: opacity 0.8s ease;
-    /* Removi o transform para parar o efeito de zoom */
-
-    /* Removi o transform: scale(1.1) que causava o zoom inicial */
-}
-
-.bg-image.active {
-    opacity: 0.6;
-    z-index: 1;
-    /* Removi o transform: scale(1) */
-}
-
-.gym-photos-grid img {
-    .gym-photos-grid img {
-        width: 100%;
-        height: auto;
-        /* Deixa a altura livre para seguir a proporção da foto */
-        aspect-ratio: 16 / 9;
-        /* Força o formato horizontal de celular */
-        border-radius: 8px;
-        object-fit: cover;
-        /* Agora o cover não dará zoom, pois a div e a foto têm o mesmo formato */
-        background: #eee;
-    }
-}
-
-.overlay-text {
-    position: absolute;
-    bottom: 50px;
-    left: 40px;
-    color: white;
-    z-index: 5;
-    max-width: 80%;
-}
-
-.overlay-text h3 {
-    font-size: 3.5rem;
-    font-weight: 900;
-    line-height: 1;
-    color: var(--accent);
-    margin-bottom: 10px;
-}
-
-.overlay-text p {
-    font-size: 1.2rem;
-    opacity: 0.9;
-    line-height: 1.4;
-}
-
-/* Ticket Sucesso */
-.success-content {
-    text-align: center;
-    padding-top: 30px;
-}
-
-.icon-circle {
-    width: 90px;
-    height: 90px;
-    background: var(--accent);
-    color: white;
-    border-radius: 50%;
-    font-size: 45px;
-    line-height: 90px;
-    margin: 0 auto 25px;
-}
-
-.ticket {
-    background: #f8f8f8;
-    padding: 25px;
-    border-radius: 10px;
-    margin: 30px 0;
-    border: 1px dashed #ccc;
-}
-
-.ticket-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 12px;
-    font-size: 1rem;
-}
-
-.ticket-total {
-    border-top: 1px solid #ddd;
-    margin-top: 15px;
-    padding-top: 15px;
-    font-size: 1.3rem;
-    font-weight: 800;
-    color: var(--primary);
-}
-
-#error-msg {
-    color: #ff4757;
-    text-align: right;
-    display: none;
-    font-size: 0.85rem;
-    margin-bottom: 10px;
-    font-weight: 600;
-}
-
-
-/* --- RESPONSIVIDADE (MOBILE) --- */
-@media (max-width: 900px) {
-    .main-wrapper {
-        flex-direction: column-reverse;
-        /* Imagem em cima, form embaixo */
-        height: auto;
-        overflow: auto;
-    }
-
-    .form-section {
-        width: 100%;
-        padding: 30px 20px;
-        overflow: visible;
-    }
-
-    .image-section {
-        width: 100%;
-        height: 200px;
-        /* Altura fixa para imagem no topo */
-    }
-
-    .bg-image {
-        transform: none !important;
-    }
-
-    /* Desativa zoom animation no mobile */
-    .overlay-text {
-        display: none;
-    }
-
-    /* Esconde texto da imagem no mobile para limpar a visão */
-
-    .step-header h2 {
-        font-size: 1.5rem;
-    }
-
-    .options-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 5px;
-    }
-
-    .option-card {
-        padding: 10px 5px;
-    }
-
-    .option-card i {
-        font-size: 1.2rem;
-    }
-
-    .option-card span {
-        font-size: 0.75rem;
-    }
-
-    .gym-photos-grid {
-        gap: 5px;
-    }
-
-    .gym-photos-grid img {
-        height: 80px;
-    }
-}
-
-.sua-div-modalidade img {
-    width: 100%;
-    height: 100%;
-
-    /* Faz a imagem se ajustar ao container sem zoom/corte */
-    object-fit: contain;
-}
-
-/* Ajuste para grids com 4 itens (Objetivo) */
-.options-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    gap: 12px;
-}
-
-/* Ajuste específico para quando queremos 3 colunas fixas (opcional, mas visualmente melhor) */
-.options-grid.col-3 {
-    grid-template-columns: repeat(3, 1fr);
-}
-
-@media (max-width: 600px) {
-    .options-grid.col-3 {
-        grid-template-columns: repeat(3, 1fr);
-        /* Mantém 3 no mobile se couber, ou... */
-    }
-
-    .option-card {
-        padding: 15px 5px;
-        min-height: 90px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .option-card i {
-        font-size: 1.4rem;
-        margin-bottom: 5px;
-    }
-
-    .option-card span {
-        font-size: 0.75rem;
-        line-height: 1.2;
-    }
-}
+/* Buttons */
+.actions { display: flex; gap: 15px; margin-top: 30px; }
+.btn-primary { background: var(--primary); color: white; border: none; padding: 16px 30px; border-radius: 12px; cursor: pointer; font-weight: 600; flex: 2; transition: 0.3s; }
+.btn-sec { background: #f0f0f0; color: #666; border: none; padding: 16px 20px; border-radius: 12px; cursor: pointer; flex: 1; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(65,105,225,0.3); }
