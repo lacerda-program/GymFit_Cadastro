@@ -1,55 +1,27 @@
-# GymFit – Página de Cadastro, Pagamento e Confirmação
+# Gym-Fit: Sistema de Matrícula Digital e Gestão de Leads
 
-Bem-vindo ao projeto **GymFit**, uma interface moderna e responsiva desenvolvida para demonstrar o fluxo de **cadastro**, **avanço para pagamento** e **página de agradecimento** de um sistema fictício de academia.
+[![Deploy Status](https://img.shields.io/badge/Status-Online-success?style=flat-square)](https://lacerda-program.github.io/GymFit_Cadastro/)
 
-Este projeto apresenta uma navegação simples, visual limpo e foco na experiência do usuário.
+## Visão Geral
+Esta aplicação é uma Single Page Application (SPA) desenvolvida para otimizar o fluxo de conversão de novos alunos para a unidade Gym-Fit em Vitória da Conquista - BA. O objetivo central da engenharia deste projeto foi a redução da taxa de abandono através de um processo de entrada de dados fragmentado (Multi-step Form) e otimização de performance.
 
----
+## Arquitetura Técnica
+O projeto foi construído utilizando os fundamentos da engenharia Web para garantir o menor tempo de carregamento e a maior compatibilidade entre dispositivos.
 
-## 🔗 Acesse a Página
+### Tecnologias Utilizadas
+* **HTML5 Semântico:** Implementação focada em SEO local e acessibilidade (WCAG).
+* **CSS3 Moderno:** Utilização de CSS Grid e Flexbox para layouts responsivos, além de variáveis (Custom Properties) para padronização do Design System.
+* **Vanilla JavaScript (ES6+):** Gestão de estado nativa para controle do formulário multi-etapas, eliminando a sobrecarga de bibliotecas de terceiros e reduzindo o bundle size.
 
-Você pode visualizar o projeto online através do link:
-=======
-## Você pode visualizar o projeto online através do link:
+## Funcionalidades e UX
+1. **Formulário Progressivo:** Estrutura dividida em 5 estágios lógicos (Dados Pessoais, Perfil de Treino, Estrutura, Planos e Confirmação), visando minimizar a carga cognitiva do usuário.
+2. **Interface Mobile-First:** Arquitetura de design adaptada prioritariamente para o uso em smartphones, garantindo fluidez na navegação mobile.
+3. **Localização Contextual:** Segmentação de conteúdo focada na região de Vitória da Conquista, visando relevância em buscas orgânicas e autoridade local.
 
+Contato e Informações do Autor
+GitHub: github.com/lacerda-program
 
-👉 **[Clique aqui para acessar o site](https://lacerda-program.github.io/GymFit_Cadastro/)**  
-
----
-
-
-
-
-## O que você encontrará.
-
-###  ✔️**Página de Cadastro**
-
-- Formulário moderno solicitando informações básicas.
-- Layout responsivo em qualquer dispositivo.
-- Call-to-action para avançar para a etapa de pagamento.
-
-### 💳 **Página de Avançar para Pagamento**
-- Resumo do plano escolhido.
-- Botão para finalizar contratação.
-- Design clean e profissional, focado na clareza das informações.
-
-### 🎉 **Página de Obrigado**
-- Confirmação visual elegante após o envio do formulário.
-- Botão para voltar para formulario.
+Email: samuellacerda1018@gmail.com
 
 
----
-
-## O que foi ultilizado, e aprendido
-
-- **HTML5**
-- **CSS3** (com design responsivo)
-- **JavaScript**
-- **Git**
-- **GitHub Desktop**
-- **postagem no github**
- 
----
-
-Obrigado por ver este projeto e me ajudar, aceito dicas para melhoria e etc...
 
