@@ -4,6 +4,10 @@
 body { height: 100vh; background: #fff; overflow: hidden; }
 
 .main-wrapper { display: flex; height: 100vh; }
+/*Icones alinhados e reajir aos cliques*/
+.opt-btn { display: flex; align-items: center; justify-content: center; gap: 10px; /* Espaço entre ícone e texto */}
+.opt-btn i { font-size: 0.9rem; color: var(--primary); /* Cor azul padrão */ transition: 0.3s;}
+.opt-btn.selected i { color: #ffffff; /* Ícone fica branco quando selecionado */}
 
 /* Form Area */
 .form-section { width: 60%; padding: 40px 8%; overflow-y: auto; background: #fff; }

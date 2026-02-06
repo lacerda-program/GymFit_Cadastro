@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gym-Fit | Inscrição Completa</title>
+    <title>Gym-Fit | Inscrição</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -50,6 +50,7 @@
                                 class="fas fa-arrow-right"></i></button>
                     </div>
                 </div>
+
                 <div class="step" id="step2">
                     <div class="step-header">
                         <h2>Seu Perfil</h2>
@@ -58,35 +59,48 @@
 
                     <label class="question-label">1. Qual seu principal objetivo?</label>
                     <div class="options-grid-mini">
-                        <div class="opt-btn" onclick="selectBtn(this, 'goal')">💪 Massa Muscular</div>
-                        <div class="opt-btn" onclick="selectBtn(this, 'goal')">🏃‍♂️ Perder Peso</div>
-                        <div class="opt-btn" onclick="selectBtn(this, 'goal')">🧘‍♂️ Saúde/Postura</div>
-                        <div class="opt-btn" onclick="selectBtn(this, 'goal')">⚡ Resistência</div>
+                        <div class="opt-btn" onclick="selectBtn(this, 'goal')"><i class="fas fa-dumbbell"></i> Massa
+                            Muscular</div>
+                        <div class="opt-btn" onclick="selectBtn(this, 'goal')"><i class="fas fa-fire-alt"></i> Perder
+                            Peso</div>
+                        <div class="opt-btn" onclick="selectBtn(this, 'goal')"><i class="fas fa-child"></i>
+                            Saúde/Postura</div>
+                        <div class="opt-btn" onclick="selectBtn(this, 'goal')"><i class="fas fa-bolt"></i> Resistência
+                        </div>
                     </div>
                     <input type="hidden" id="goal">
 
                     <label class="question-label">2. Nível de experiência?</label>
                     <div class="options-grid-mini">
-                        <div class="opt-btn" onclick="selectBtn(this, 'level')">🥚 Nunca treinei</div>
-                        <div class="opt-btn" onclick="selectBtn(this, 'level')">🐣 Treino às vezes</div>
-                        <div class="opt-btn" onclick="selectBtn(this, 'level')">🦅 Treino faz tempo</div>
-                        <div class="opt-btn" onclick="selectBtn(this, 'level')">🏆 Sou atleta</div>
+                        <div class="opt-btn" onclick="selectBtn(this, 'level')"><i class="fas fa-seedling"></i> Nunca
+                            treinei</div>
+                        <div class="opt-btn" onclick="selectBtn(this, 'level')"><i class="fas fa-walking"></i> Treino às
+                            vezes</div>
+                        <div class="opt-btn" onclick="selectBtn(this, 'level')"><i class="fas fa-fist-raised"></i>
+                            Treino faz tempo</div>
+                        <div class="opt-btn" onclick="selectBtn(this, 'level')"><i class="fas fa-trophy"></i> Sou atleta
+                        </div>
                     </div>
                     <input type="hidden" id="level">
 
                     <label class="question-label">3. Frequência semanal?</label>
                     <div class="options-grid-mini">
-                        <div class="opt-btn" onclick="selectBtn(this, 'freq')">🗓️ 1 a 2 vezes</div>
-                        <div class="opt-btn" onclick="selectBtn(this, 'freq')">🗓️ 3 a 5 vezes</div>
-                        <div class="opt-btn" onclick="selectBtn(this, 'freq')">🔥 Todos os dias</div>
+                        <div class="opt-btn" onclick="selectBtn(this, 'freq')"><i class="fas fa-calendar-minus"></i> 1 a
+                            2 vezes</div>
+                        <div class="opt-btn" onclick="selectBtn(this, 'freq')"><i class="fas fa-calendar-alt"></i> 3 a 5
+                            vezes</div>
+                        <div class="opt-btn" onclick="selectBtn(this, 'freq')"><i class="fas fa-fire"></i> Todos os dias
+                        </div>
                     </div>
                     <input type="hidden" id="freq">
 
                     <label class="question-label">4. Horários disponíveis?</label>
                     <div class="options-grid-mini">
-                        <div class="opt-btn multi" onclick="toggleMultiBtn(this)">🌅 Manhã</div>
-                        <div class="opt-btn multi" onclick="toggleMultiBtn(this)">☀️ Tarde</div>
-                        <div class="opt-btn multi" onclick="toggleMultiBtn(this)">🌙 Noite</div>
+                        <div class="opt-btn multi" onclick="toggleMultiBtn(this)"><i class="fas fa-sun"></i> Manhã</div>
+                        <div class="opt-btn multi" onclick="toggleMultiBtn(this)"><i class="fas fa-cloud-sun"></i> Tarde
+                        </div>
+                        <div class="opt-btn multi" onclick="toggleMultiBtn(this)"><i class="fas fa-moon"></i> Noite
+                        </div>
                     </div>
 
                     <div class="grid-2" style="margin-top: 15px;">
@@ -108,36 +122,18 @@
                         <p>Av. J.Pedral, 705 - Vitória da Conquista</p>
                     </div>
                     <div class="info-badges full-list">
-                        <div class="badge-item">
-                            <i class="fas fa-parking"></i> Estacionamento Grátis
-                        </div>
-                        <div class="badge-item">
-                            <i class="fas fa-snowflake"></i> 100% Climatizada
-                        </div>
-                        <div class="badge-item">
-                            <i class="fas fa-shower"></i> Vestiários Premium
-                        </div>
-                        <div class="badge-item">
-                            <i class="fas fa-utensils"></i> Treinos e Dietas Personalizados
-                        </div>
-                        <div class="badge-item">
-                            <i class="fas fa-user-tie"></i> Personais prontos para atendimento
-                        </div>
-                        <div class="badge-item">
-                            <i class="fas fa-microchip"></i> Aparelhos de última tecnologia
-                        </div>
-                        <div class="badge-item">
-                            <i class="fas fa-fist-raised"></i> Aulas de Jiu-Jitsu
-                        </div>
-                        <div class="badge-item">
-                            <i class="fas fa-mitten"></i> Aulas de Muay Thai
-                        </div>
-                        <div class="badge-item">
-                            <i class="fas fa-blender"></i> Suplementos Pré-Treino e Whey
-                        </div>
+                        <div class="badge-item"><i class="fas fa-parking"></i> Estacionamento Grátis</div>
+                        <div class="badge-item"><i class="fas fa-snowflake"></i> 100% Climatizada</div>
+                        <div class="badge-item"><i class="fas fa-shower"></i> Vestiários Premium</div>
+                        <div class="badge-item"><i class="fas fa-utensils"></i> Treinos e Dietas Personalizados</div>
+                        <div class="badge-item"><i class="fas fa-user-tie"></i> Personais prontos para atendimento</div>
+                        <div class="badge-item"><i class="fas fa-microchip"></i> Aparelhos de última tecnologia</div>
+                        <div class="badge-item"><i class="fas fa-fist-raised"></i> Aulas de Jiu-Jitsu</div>
+                        <div class="badge-item"><i class="fas fa-mitten"></i> Aulas de Muay Thai</div>
+                        <div class="badge-item"><i class="fas fa-blender"></i> Suplementos Pré-Treino e Whey</div>
                     </div>
                     <div class="gym-photos-grid">
-                        <img src="images/musculação.jpg" alt="Musculação">
+                        <img src="images/musculacao.jpg" alt="Musculação">
                         <img src="images/jiu-jitsu.jpg" alt="Lutas">
                         <img src="images/cardio.jpg" alt="Cardio">
                     </div>
@@ -185,62 +181,69 @@
                         <div class="payment-options-grid-new">
                             <label class="pay-card">
                                 <input type="radio" name="pay_method" value="pix" checked>
-                                <div class="pay-content">
-                                    <i class="fas fa-qrcode"></i>
-                                    <span>Pix</span>
-                                </div>
+                                <div class="pay-content"><i class="fas fa-qrcode"></i><span>Pix</span></div>
                             </label>
-
                             <label class="pay-card">
                                 <input type="radio" name="pay_method" value="card">
-                                <div class="pay-content">
-                                    <i class="fas fa-credit-card"></i>
-                                    <span>Cartão</span>
-                                </div>
+                                <div class="pay-content"><i class="fas fa-credit-card"></i><span>Cartão</span></div>
                             </label>
-
                             <label class="pay-card">
                                 <input type="radio" name="pay_method" value="cash">
-                                <div class="pay-content">
-                                    <i class="fas fa-money-bill-wave"></i>
-                                    <span>Dinheiro</span>
+                                <div class="pay-content"><i class="fas fa-money-bill-wave"></i><span>Dinheiro</span>
                                 </div>
                             </label>
                         </div>
 
-                        <div id="cash-alert" class="info-box-orange">
+                        <div id="cash-alert" class="info-box-orange" style="display:none;">
                             <i class="fas fa-exclamation-triangle"></i>
-                            <strong>Atenção:</strong> Ao optar pelo pagamento em espécie, sua vaga será reservada em
-                            nosso sistema um período de 48 horas. Para validar sua matrícula,
-                            dirija-se à nossa recepção com documento com foto para efetivar o pagamento e a
-                            retirada de sua credencial de acesso.</p>
+                            <p><strong>Atenção:</strong> Ao optar pelo pagamento em espécie, sua vaga será reservada por
+                                48 horas. Compareça à recepção para validar.</p>
                         </div>
                     </div>
 
-                  
+                    <input type="hidden" id="selectedPlanName">
+                    <input type="hidden" id="selectedPlanPrice">
 
-                <input type="hidden" id="selectedPlanName">
-                <input type="hidden" id="selectedPlanPrice">
-
-                <div class="actions">
-                    <button type="button" class="btn-sec" onclick="prevStep(4)">Voltar</button>
-                    <button type="button" id="btn-final" class="btn-primary" onclick="finishRegistration()">Finalizar
-                        Matrícula</button>
+                    <div class="actions">
+                        <button type="button" class="btn-sec" onclick="prevStep(4)">Voltar</button>
+                        <button type="button" id="btn-final" class="btn-primary"
+                            onclick="finishRegistration()">Finalizar Matrícula</button>
+                    </div>
                 </div>
-        </div>
-    </div>
-    <div class="image-section">
-        <div class="bg-image active" id="img-step1"><img src="images/frente-da-academia.png"></div>
-        <div class="bg-image" id="img-step2"><img src="images/area-de-musculacao.png"></div>
-        <div class="bg-image" id="img-step3"><img src="images/frente-da-academia.png"></div>
-        <div class="bg-image" id="img-step4"><img src="images/treino-da-academia.png"></div>
-        <div class="bg-image" id="img-step5"><img src="images/welcome.jpg"></div>
 
-        <div class="overlay-text">
-            <h3>BEM-VINDO</h3>
-            <p>O primeiro passo para o topo começa aqui.</p>
+                <div class="step" id="step5">
+                    <div class="success-content" style="text-align: center; padding: 30px;">
+                        <i class="fas fa-check-circle"
+                            style="font-size: 4rem; color: #28a745; margin-bottom: 20px;"></i>
+                        <h2>Matrícula Solicitada!</h2>
+                        <p>Parabéns, <strong id="finalName"></strong>! Sua jornada na Gym-Fit começou.</p>
+
+                        <div class="ticket-summary"
+                            style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0; border: 1px dashed #ccc;">
+                            <p>Plano: <strong id="finalPlan"></strong></p>
+                            <p>Valor: <strong id="finalPrice"></strong></p>
+                        </div>
+
+                        <button type="button" class="btn-primary" onclick="window.location.reload()">Fazer Novo
+                            Cadastro</button>
+                    </div>
+                </div>
+
+            </form>
         </div>
-    </div>
+
+        <div class="image-section">
+            <div class="bg-image active" id="img-step1"><img src="images/frente-da-academia.png"></div>
+            <div class="bg-image" id="img-step2"><img src="images/area-de-musculacao.png"></div>
+            <div class="bg-image" id="img-step3"><img src="images/interna-da-academia.jpg"></div>
+            <div class="bg-image" id="img-step4"><img src="images/treino-da-academia.png"></div>
+            <div class="bg-image" id="img-step5"><img src="images/welcome.jpg"></div>
+
+            <div class="overlay-text">
+                <h3>BEM-VINDO</h3>
+                <p>O primeiro passo para o topo começa aqui.</p>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
