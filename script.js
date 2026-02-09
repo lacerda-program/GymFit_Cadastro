@@ -11,7 +11,7 @@ const frasesPorPasso = {
         texto: "Personalize seu perfil para que possamos entender exatamente onde você quer chegar."
     },
     3: {
-        titulo: "INFRAESTRUTURA ELITE",
+        titulo: "INFRAESTRUTURA DE ELITE",
         texto: "Treine no que há de melhor em Vitória da Conquista. Você merece essa experiência."
     },
     4: {
@@ -118,6 +118,27 @@ function selectOption(category, value, element) {
     element.classList.add('selected');
 }
 
+document.querySelectorAll('input[name="pay_method"]').forEach((input) => {
+    input.addEventListener('change', function() {
+        const cashAlert = document.getElementById('cash-alert');
+        const submitBtn = document.querySelector('#step4 .btn-primary');
+        
+        if (this.value === 'cash') {
+            // ESTADO DINHEIRO (Reserva)
+            cashAlert.classList.add('active');
+            submitBtn.innerHTML = 'Reservar Matrícula <i class="fas fa-money-bill-wave" style="color: white;"></i>';
+            submitBtn.style.backgroundColor = '#28a745'; // Botão fica verde
+        } else {
+            // ESTADO PADRÃO (Finalizar)
+            cashAlert.classList.remove('active');
+            
+            // Se for Pix ou Cartão, o ícone é o de cartão (ou você pode colocar condicional para Pix)
+            submitBtn.innerHTML = 'Finalizar Cadastro <i class="fas fa-credit-card" style="color: white;"></i>';
+            submitBtn.style.backgroundColor = ''; // Volta para o Azul Royal do CSS (--primary)
+        }
+    });
+});
+
 // Seleção de Planos (A parte crítica do Step 4)
 function selectPlan(planName, price, element) {
     // Atualiza inputs hidden
@@ -163,6 +184,17 @@ function finishRegistration() {
     // Avança para o passo final
     nextStep(4);
 }
+// Lógica para mostrar/esconder o alerta de dinheiro
+document.querySelectorAll('input[name="pay_method"]').forEach((input) => {
+    input.addEventListener('change', function() {
+        const cashAlert = document.getElementById('cash-alert');
+        if (this.value === 'cash') {
+            cashAlert.classList.add('active');
+        } else {
+            cashAlert.classList.remove('active');
+        }
+    });
+});
 
 // Inicialização (Garante que começa certo)
 document.addEventListener('DOMContentLoaded', () => {

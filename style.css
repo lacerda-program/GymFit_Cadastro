@@ -64,19 +64,26 @@ body { height: 100vh; background: #fff; overflow: hidden; }
 .info-box-orange {
     display: none; /* Escondido por padrão */
     background: #fff4e6;
-    border-left: 5px solid #fd7e14; /* Laranja forte */
+    border-left: 5px solid #fd7e14;
     padding: 15px;
     margin-top: 20px;
     border-radius: 8px;
     color: #d9480f;
     font-size: 0.85rem;
-    display: flex;
     align-items: center;
     gap: 15px;
+}
+
+/* Esta classe será adicionada pelo JavaScript */
+.info-box-orange.active {
+    display: flex; 
     animation: fadeIn 0.3s ease;
 }
 
-.info-box-orange i { font-size: 1.2rem; }
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
 /* Grid de Pagamento com ícones */
 .payment-options-grid-new {
@@ -114,6 +121,30 @@ body { height: 100vh; background: #fff; overflow: hidden; }
 /* Cores dos Botões */
 .btn-primary.btn-reserve {
     background-color: #28a745 !important; /* Verde */
+}
+
+/* Apenas quando o input com valor 'cash' for selecionado, o card dele fica verde */
+.payment-card input[value="cash"]:checked + .payment-design {
+    border-color: #28a745 !important;
+    background: #f0fff4 !important;
+    color: #28a745 !important;
+}
+
+.payment-card input[value="cash"]:checked + .payment-design i {
+    color: #28a745 !important;
+}
+
+/* Estilos para Pix e Cartão (Mantendo o padrão Azul) */
+.payment-card input[value="pix"]:checked + .payment-design,
+.payment-card input[value="card"]:checked + .payment-design {
+    border-color: var(--primary) !important;
+    background: #f0f4ff !important;
+    color: var(--primary) !important;
+}
+
+.payment-card input[value="pix"]:checked + .payment-design i,
+.payment-card input[value="card"]:checked + .payment-design i {
+    color: var(--primary) !important;
 }
 
 video/* Estado inicial do Plano */
