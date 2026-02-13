@@ -61,10 +61,9 @@
                         </div>
                     </div>
 
-                    <div class="actions right">
-                        <button class="btn-primary" onclick="nextStep(1)">Continuar <i
-                                class="fas fa-arrow-right"></i></button>
-                    </div>
+                    <button type="button" class="btn-primary" onclick="nextStep(2)">
+                        Continuar <i class="fas fa-arrow-right"></i>
+                    </button>
                 </div>
 
                 <div class="step" id="step2">
@@ -90,6 +89,22 @@
                         <div class="option-card" onclick="selectOption('goal', 'Condicionamento', this)">
                             <i class="fas fa-running"></i>
                             <span>Resistência</span>
+                        </div>
+                        <div class="option-card" onclick="selectOption('goal', 'Mobilidade', this)">
+                            <i class="fas fa-child"></i>
+                            <span>Mobilidade</span>
+                        </div>
+                        <div class="option-card" onclick="selectOption('goal', 'Bem-estar', this)">
+                            <i class="fas fa-spa"></i>
+                            <span>Bem-estar</span>
+                        </div>
+                        <div class="option-card" onclick="selectOption('goal', 'Reabilitacao', this)">
+                            <i class="fas fa-procedures"></i>
+                            <span>Reabilitação</span>
+                        </div>
+                        <div class="option-card" onclick="selectOption('goal', 'Estetica', this)">
+                            <i class="fas fa-award"></i>
+                            <span>Estética</span>
                         </div>
                     </div>
                     <input type="hidden" id="goal">
@@ -155,8 +170,9 @@
                     </div>
 
                     <div class="actions">
-                        <button class="btn-sec" onclick="prevStep(2)">Voltar</button>
-                        <button class="btn-primary" onclick="nextStep(2)">Próximo</button>
+                        <button type="button" class="btn-sec" onclick="prevStep(1)">Voltar</button>
+
+                        <button type="button" class="btn-primary" onclick="nextStep(3)">Próximo</button>
                     </div>
                 </div>
                 <div class="step" id="step3">
@@ -192,8 +208,9 @@
                     </div>
 
                     <div class="actions">
-                        <button class="btn-sec" onclick="prevStep(3)">Voltar</button>
-                        <button class="btn-primary" onclick="nextStep(3)">Ver Planos</button>
+                        <button type="button" class="btn-sec" onclick="prevStep(2)">Voltar</button>
+
+                        <button type="button" class="btn-primary" onclick="nextStep(4)">Ver Planos</button>
                     </div>
                 </div>
 
@@ -234,7 +251,8 @@
                         <div id="cash-alert" class="info-box-orange">
                             <i class="fas fa-info-circle"></i>
                             <p>Para pagamento em espécie, finalize o cadastro e apresente-se na <strong>recepção da
-                                    academia portanto documento com foto em até 48hrs.</strong> Para assim liberar-mos seu acesso a nossa academia.</p>
+                                    academia portanto documento com foto em até 48hrs.</strong> Para assim liberar-mos
+                                seu acesso a nossa academia.</p>
                         </div>
                     </div>
 
@@ -280,8 +298,9 @@
                     <p id="error-msg">Selecione um plano acima.</p>
 
                     <div class="actions">
-                        <button class="btn-sec" onclick="prevStep(4)">Voltar</button>
-                        <button class="btn-primary" onclick="finishRegistration()">Finalizar</button>
+                        <button type="button" class="btn-sec" onclick="prevStep(3)">Voltar</button>
+
+                        <button type="button" class="btn-primary" onclick="finishRegistration()">Finalizar</button>
                     </div>
                 </div>
 
@@ -307,7 +326,12 @@
                             </div>
                         </div>
 
-                        <button class="btn-primary full" onclick="location.reload()">Novo Cadastro</button>
+                        <div class="success-footer">
+                            <p>Deseja matricular outra pessoa?</p>
+                            <button type="button" class="btn-primary full" onclick="location.reload()">
+                                <i class="fas fa-redo"></i> Novo Cadastro
+                            </button>
+                        </div>
                     </div>
                 </div>
             </form>

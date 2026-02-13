@@ -1,202 +1,176 @@
 // ============================================================
-// 1. CONFIGURAÇÃO DAS FRASES LATERAIS (COPYWRITING)
+// 1. CONFIGURAÇÃO E ESTADO GLOBAL
 // ============================================================
 const frasesPorPasso = {
-    1: {
-        titulo: "SEJA BEM-VINDO",
-        texto: "O primeiro passo para a sua melhor versão começa com um cadastro simples."
-    },
-    2: {
-        titulo: "FOCO NO RESULTADO",
-        texto: "Personalize seu perfil para que possamos entender exatamente onde você quer chegar."
-    },
-    3: {
-        titulo: "INFRAESTRUTURA DE ELITE",
-        texto: "Treine no que há de melhor em Vitória da Conquista. Você merece essa experiência."
-    },
-    4: {
-        titulo: "INVESTIMENTO NO FUTURO",
-        texto: "Sua saúde é o seu maior patrimônio. Escolha o plano que vai transformar sua rotina."
-    },
-    5: {
-        titulo: "BEM VINDO!",
-        texto: "Esperamos você em breve, agora de fato como parte da família."
-    }
+    1: { title: "SEJA BEM-VINDO!", desc: "O primeiro passo para a sua melhor versão começa aqui." },
+    2: { title: "FOCO TOTAL", desc: "Ajuste sua rotina e domine seus horários." },
+    3: { title: "EXPERIÊNCIA DE ELITE", desc: "Sinta o poder da tecnologia a favor do seu corpo." },
+    4: { title: "ESCOLHA SEU DESTINO", desc: "Selecione o plano que combina com seu estilo de vida." },
+    5: { title: "VOCÊ CONSEGUIU!", desc: "Sua jornada de alto padrão está apenas começando." }
 };
 
-// ============================================================
-// 2. FUNÇÃO DE ATUALIZAÇÃO DO TEXTO LATERAL
-// ============================================================
-function atualizarTextoLateral(step) {
-    const overlay = document.querySelector('.overlay-text');
-    const titulo = document.getElementById('side-title');
-    const texto = document.getElementById('side-desc');
-
-    if (overlay && titulo && texto && frasesPorPasso[step]) {
-        // Efeito de saída
-        overlay.style.opacity = '0';
-        overlay.style.transform = 'translateY(10px)';
-
-        setTimeout(() => {
-            // Troca o texto
-            titulo.innerText = frasesPorPasso[step].titulo;
-            texto.innerText = frasesPorPasso[step].texto;
-
-            // Efeito de entrada
-            overlay.style.opacity = '1';
-            overlay.style.transform = 'translateY(0)';
-        }, 300);
-    }
-}
+let currentStep = 1;
 
 // ============================================================
-// 3. NAVEGAÇÃO ENTRE PASSOS (NEXT / PREV)
+// 2. NAVEGAÇÃO E INTERFACE
 // ============================================================
-function nextStep(currentStep) {
-    // Validação básica (Opcional: impedir avanço se campos vazios)
-    if (currentStep === 1) {
-        const nome = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        if (!nome || !email) {
-            alert("Por favor, preencha seu Nome e E-mail para continuar.");
+
+function nextStep(step) {
+    console.log("Botão clicado! Tentando ir para o passo:", step);
+    console.log("Passo atual registrado no sistema:", currentStep);
+
+    // Validação para o passo final
+    if (currentStep === 4 && step === 5) {
+        console.log("Validando plano antes de finalizar...");
+        const planName = document.getElementById('selectedPlanName')?.value;
+        if (!planName) {
+            alert("Por favor, selecione um plano para continuar.");
             return;
         }
-    }
-
-    // Lógica de troca de tela
-    document.getElementById(`step${currentStep}`).classList.remove('active');
-    document.getElementById(`step${currentStep + 1}`).classList.add('active');
-
-    // Troca de Imagem de Fundo
-    const currentImg = document.getElementById(`img-step${currentStep}`);
-    const nextImg = document.getElementById(`img-step${currentStep + 1}`);
-    if (currentImg) currentImg.classList.remove('active');
-    if (nextImg) nextImg.classList.add('active');
-
-    // Atualiza Barra de Progresso
-    const progressBar = document.getElementById('progressBar');
-    const progress = ((currentStep) / 4) * 100; // 4 passos totais antes do fim
-    progressBar.style.width = `${progress + 25}%`;
-
-    // Atualiza Texto Lateral
-    atualizarTextoLateral(currentStep + 1);
-}
-
-function prevStep(currentStep) {
-    document.getElementById(`step${currentStep}`).classList.remove('active');
-    document.getElementById(`step${currentStep - 1}`).classList.add('active');
-
-    const currentImg = document.getElementById(`img-step${currentStep}`);
-    const prevImg = document.getElementById(`img-step${currentStep - 1}`);
-    if (currentImg) currentImg.classList.remove('active');
-    if (prevImg) prevImg.classList.add('active');
-
-    const progressBar = document.getElementById('progressBar');
-    const progress = ((currentStep - 2) / 4) * 100;
-    progressBar.style.width = `${progress + 25}%`;
-
-    atualizarTextoLateral(currentStep - 1);
-}
-
-// ============================================================
-// 4. INTERATIVIDADE DO FORMULÁRIO (SELEÇÕES)
-// ============================================================
-
-// Seleção de Cards (Objetivos, Experiência, etc)
-function selectOption(category, value, element) {
-    // Salva no input hidden
-    document.getElementById(category).value = value;
-
-    // Remove classe 'selected' dos irmãos
-    const parent = element.parentElement;
-    const siblings = parent.getElementsByClassName('option-card');
-    for (let sib of siblings) {
-        sib.classList.remove('selected');
-    }
-
-    // Adiciona classe ao clicado
-    element.classList.add('selected');
-}
-
-document.querySelectorAll('input[name="pay_method"]').forEach((input) => {
-    input.addEventListener('change', function() {
-        const cashAlert = document.getElementById('cash-alert');
-        const submitBtn = document.querySelector('#step4 .btn-primary');
-        
-        if (this.value === 'cash') {
-            // ESTADO DINHEIRO (Reserva)
-            cashAlert.classList.add('active');
-            submitBtn.innerHTML = 'Reservar Matrícula <i class="fas fa-money-bill-wave" style="color: white;"></i>';
-            submitBtn.style.backgroundColor = '#28a745'; // Botão fica verde
-        } else {
-            // ESTADO PADRÃO (Finalizar)
-            cashAlert.classList.remove('active');
-            
-            // Se for Pix ou Cartão, o ícone é o de cartão (ou você pode colocar condicional para Pix)
-            submitBtn.innerHTML = 'Finalizar Cadastro <i class="fas fa-credit-card" style="color: white;"></i>';
-            submitBtn.style.backgroundColor = ''; // Volta para o Azul Royal do CSS (--primary)
-        }
-    });
-});
-
-// Seleção de Planos (A parte crítica do Step 4)
-function selectPlan(planName, price, element) {
-    // Atualiza inputs hidden
-    document.getElementById('selectedPlanName').value = planName;
-    document.getElementById('selectedPlanPrice').value = price;
-
-    // Remove visual de seleção anterior
-    const allPlans = document.querySelectorAll('.plan-row');
-    allPlans.forEach(plan => plan.classList.remove('selected'));
-
-    // Adiciona visual ao novo
-    element.classList.add('selected');
-
-    // Esconde mensagem de erro se houver
-    document.getElementById('error-msg').style.display = 'none';
-}
-
-// ============================================================
-// 5. FINALIZAÇÃO E GERAÇÃO DO TICKET
-// ============================================================
-function finishRegistration() {
-    const planName = document.getElementById('selectedPlanName').value;
-    const planPrice = document.getElementById('selectedPlanPrice').value;
-    const userName = document.getElementById('name').value;
-
-    // Validação: Obrigatório escolher um plano
-    if (!planName) {
-        const errorMsg = document.getElementById('error-msg');
-        errorMsg.style.display = 'block';
-        errorMsg.style.color = 'red';
-        errorMsg.innerText = "⚠️ Por favor, selecione um plano para continuar.";
+        finishRegistration(); 
         return;
     }
 
-    // Preenche o Ticket Final (Step 5)
-    document.getElementById('finalName').innerText = userName || "Visitante";
-    document.getElementById('finalPlan').innerText = planName;
-    
-    // Formata o preço para R$
-    const priceFormatted = parseFloat(planPrice).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-    document.getElementById('finalPrice').innerText = priceFormatted;
-
-    // Avança para o passo final
-    nextStep(4);
+    // Se o código chegar aqui, ele TEM que mudar a página
+    console.log("Chamando updateUI para o passo:", step);
+    updateUI(step);
 }
-// Lógica para mostrar/esconder o alerta de dinheiro
-document.querySelectorAll('input[name="pay_method"]').forEach((input) => {
-    input.addEventListener('change', function() {
-        const cashAlert = document.getElementById('cash-alert');
-        if (this.value === 'cash') {
-            cashAlert.classList.add('active');
-        } else {
-            cashAlert.classList.remove('active');
-        }
-    });
-});
 
-// Inicialização (Garante que começa certo)
+function prevStep(step) {
+    updateUI(step);
+}
+
+function updateUI(step) {
+    currentStep = step;
+
+    // A. Troca de Steps (Formulário)
+    document.querySelectorAll('.step').forEach(s => {
+        s.classList.remove('active');
+        s.style.display = 'none';
+    });
+    
+    const targetStep = document.getElementById(`step${step}`);
+    if (targetStep) {
+        targetStep.classList.add('active');
+        targetStep.style.display = 'block';
+    }
+
+    // B. Troca de Imagens
+    document.querySelectorAll('.bg-image').forEach(img => img.classList.remove('active'));
+    const targetImg = document.getElementById(`img-step${step}`);
+    if (targetImg) targetImg.classList.add('active');
+
+    // C. Troca de Textos Laterais
+    atualizarTextoLateral(step);
+
+    // D. Atualiza Progresso
+    const bar = document.querySelector('.progress-bar');
+    if (bar) bar.style.width = `${(step / 5) * 100}%`;
+}
+
+function atualizarTextoLateral(step) {
+    const titleElem = document.getElementById('side-title');
+    const descElem = document.getElementById('side-desc');
+    
+    if (frasesPorPasso[step] && titleElem && descElem) {
+        titleElem.innerText = frasesPorPasso[step].title;
+        descElem.innerText = frasesPorPasso[step].desc;
+    }
+}
+
+// ============================================================
+// 3. SELEÇÕES E PLANOS
+// ============================================================
+
+function selectOption(category, value, element) {
+    element.dataset.value = value;
+    const multiSelectCategories = ['goal', 'frequency', 'time'];
+    const parent = element.parentElement;
+    const siblings = parent.getElementsByClassName('option-card');
+
+    if (multiSelectCategories.includes(category)) {
+        element.classList.toggle('selected');
+        const selectedValues = Array.from(siblings)
+            .filter(sib => sib.classList.contains('selected'))
+            .map(sib => sib.dataset.value);
+        
+        document.getElementById(category).value = selectedValues.join(',');
+        return;
+    }
+
+    document.getElementById(category).value = value;
+    for (let sib of siblings) sib.classList.remove('selected');
+    element.classList.add('selected');
+}
+
+function selectPlan(planName, price, element) {
+    // Sincronizando com os IDs que o seu Step 5 vai ler
+    const inputName = document.getElementById('selectedPlanName');
+    const inputPrice = document.getElementById('selectedPlanPrice');
+    
+    if(inputName) inputName.value = planName;
+    if(inputPrice) inputPrice.value = price;
+
+    const allPlans = document.querySelectorAll('.plan-row');
+    allPlans.forEach(plan => plan.classList.remove('selected'));
+    element.classList.add('selected');
+
+    const errorMsg = document.getElementById('error-msg');
+    if(errorMsg) errorMsg.style.display = 'none';
+}
+
+// ============================================================
+// 4. FINALIZAÇÃO (TICKET)
+// ============================================================
+
+function finishRegistration() {
+    // Pegando os valores dos campos que você definiu
+    const planName = document.getElementById('selectedPlanName')?.value;
+    const planPrice = document.getElementById('selectedPlanPrice')?.value;
+    const userName = document.getElementById('name')?.value || "Atleta";
+
+    // Preenche o Ticket Final
+    const finalNameElem = document.getElementById('finalName');
+    const finalPlanElem = document.getElementById('finalPlan');
+    const finalPriceElem = document.getElementById('finalPrice');
+
+    if (finalNameElem) finalNameElem.innerText = userName;
+    if (finalPlanElem) finalPlanElem.innerText = planName;
+    
+    if (finalPriceElem && planPrice) {
+        const priceFormatted = parseFloat(planPrice).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        finalPriceElem.innerText = priceFormatted;
+    }
+
+    updateUI(5);
+}
+
+// ============================================================
+// 5. EVENT LISTENERS E INICIALIZAÇÃO
+// ============================================
+
 document.addEventListener('DOMContentLoaded', () => {
+    // Listener para o método de pagamento (Dinheiro/Pix)
+    document.querySelectorAll('input[name="pay_method"]').forEach((input) => {
+        input.addEventListener('change', function() {
+            const cashAlert = document.getElementById('cash-alert');
+            const submitBtn = document.querySelector('#step4 .btn-primary');
+            
+            if (this.value === 'cash') {
+                if(cashAlert) cashAlert.classList.add('active');
+                if(submitBtn) {
+                    submitBtn.innerHTML = 'Reservar Matrícula <i class="fas fa-money-bill-wave"></i>';
+                    submitBtn.style.backgroundColor = '#28a745';
+                }
+            } else {
+                if(cashAlert) cashAlert.classList.remove('active');
+                if(submitBtn) {
+                    submitBtn.innerHTML = 'Finalizar Cadastro <i class="fas fa-credit-card"></i>';
+                    submitBtn.style.backgroundColor = ''; 
+                }
+            }
+        });
+    });
+
     atualizarTextoLateral(1);
 });
