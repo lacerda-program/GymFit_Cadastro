@@ -201,10 +201,15 @@
                     </div>
 
                     <div class="schedule-box">
-                        <h4><i class="far fa-clock"></i> Horário de Treino</h4>
+                        <h3><i class="far fa-clock"></i> Horário de Treino</h3>
                         <p>Seg a Sex: <strong>05:00 às 23:00</strong></p>
                         <p>Sábados: <strong>08:00 às 18:00</strong></p>
                         <p>Domingos: <strong>08:00 às 13:00</strong></p>
+
+                        <h3>Horario De funcionamento da secretaria.</h3>
+                        <p>Segunda a Sexta: <strong>08:00 às 17:00</strong></p>
+                        <p>Sabado: <strong>08:00 às 12:00</strong></p>
+                        <p>Domingo: <strong>Fechado</strong></p>
                     </div>
 
                     <div class="actions">
@@ -231,7 +236,7 @@
                             </label>
 
                             <label class="payment-card">
-                                <input type="radio" name="pay_method" value="card">
+                                <input type="radio" name="pay_method" value="cartao"> 
                                 <div class="payment-design">
                                     <i class="fas fa-credit-card"></i>
                                     <span>Cartão</span>
@@ -256,43 +261,77 @@
                         </div>
                     </div>
 
-                    <div class="plans-list">
-                        <div class="plan-row" onclick="selectPlan('Mensal', 200, this)">
+                    <div class="plan-list">
+                        <div class="plan-row" onclick="selectPlan('Mensal Silver', '230', this)">
                             <div class="plan-info">
-                                <span class="plan-title">Mensal</span>
-                                <span class="plan-sub">Flexibilidade total</span>
+                                <span class="plan-title">MENSAL SILVER</span>
+                                <ul class="plan-benefits">
+                                    <li><i class="fas fa-check"></i> Acesso total à musculação e área cárdio</li>
+                                    <li><i class="fas fa-check"></i> Acesso a choveiros e toalhas de banho</li>
+                                    <li><i class="fas fa-check"></i> Armário rotativo com senha digital e USB</li>
+                                </ul>
                             </div>
-                            <div class="plan-value">R$ 200</div>
+                            <div class="plan-value">
+                                <span class="price-current">R$ 230</span>
+                                <small>/mês</small>
+                            </div>
                         </div>
 
-                        <div class="plan-row recommended" onclick="selectPlan('Trimestral', 540, this)">
-                            <div class="discount-tag">-10%</div>
+                        <div class="plan-row" onclick="selectPlan('Trimestral Gold', '207', this)">
+                            <div class="discount-tag blue">10% OFF</div>
                             <div class="plan-info">
-                                <span class="plan-title">Trimestral</span>
-                                <span class="plan-sub">Equivalente a R$ 180/mês</span>
+                                <span class="plan-title">TRIMESTRAL GOLD</span>
+                                <ul class="plan-benefits">
+                                    <li><i class="fas fa-plus"></i> Benefícios do Plano Silver</li>
+                                    <li><i class="fas fa-check"></i> 1 Avaliação de físico com proficional</li>
+                                    <li><i class="fas fa-check"></i> Acesso a todas as aulas coletivas</li>
+                                </ul>
                             </div>
-                            <div class="plan-value">R$ 540</div>
+                            <div class="plan-value">
+                                <span class="price-old">R$ 230</span>
+                                <span class="price-current">R$ 207</span>
+                                <small>/mês</small>
+                            </div>
                         </div>
 
-                        <div class="plan-row" onclick="selectPlan('Semestral', 1020, this)">
-                            <div class="discount-tag blue">-15%</div>
+                        <div class="plan-row" onclick="selectPlan('Semestral Platinum', '195.50', this)">
+                            <div class="discount-tag orange">15% OFF</div>
                             <div class="plan-info">
-                                <span class="plan-title">Semestral</span>
-                                <span class="plan-sub">Equivalente a R$ 170/mês</span>
+                                <span class="plan-title">SEMESTRAL PLATINIUM</span>
+                                <ul class="plan-benefits">
+                                    <li><i class="fas fa-plus"></i> Benefícios do Plano Gold</li>
+                                    <li><i class="fas fa-check"></i> Lounge VIP com serviço de café, frutas, e WI-FI
+                                    </li>
+                                    <li><i class="fas fa-check"></i> Direito a 3 convidado por mês (Pass)</li>
+                                </ul>
                             </div>
-                            <div class="plan-value">R$ 1.020</div>
+                            <div class="plan-value">
+                                <span class="price-old">R$ 230</span>
+                                <span class="price-current">R$ 195,50</span>
+                                <small>/mês</small>
+                            </div>
                         </div>
 
-                        <div class="plan-row" onclick="selectPlan('Anual', 1920, this)">
-                            <div class="discount-tag gold">-20%</div>
+                        <div class="plan-row" onclick="selectPlan('Anual Diamond', '184', this)">
+                            <div class="discount-tag gold">20% OFF - MELHOR ESCOLHA</div>
                             <div class="plan-info">
-                                <span class="plan-title">Anual</span>
-                                <span class="plan-sub">Melhor custo-benefício</span>
+                                <span class="plan-title">ANUAL DIAMOND</span>
+                                <ul class="plan-benefits">
+                                    <li> <i class="fas fa-plus"></i> Benefícios do Plano Platinum</li>
+                                    <li><i class="fas fa-star"></i> Acesso total ao Spa e Sauna</li>
+                                    <li><i class="fas fa-star"></i> Acesso ao Bar de suplementos com até 20% de desconto
+                                        em todos os produtos </li>
+                                    <li><i class="fas fa-star"></i> Kit de Boas-vindas (Bag Garrafas, camisas e etc...)
+                                    </li>
+                                </ul>
                             </div>
-                            <div class="plan-value">R$ 1.920</div>
+                            <div class="plan-value">
+                                <span class="price-old">R$ 230</span>
+                                <span class="price-current">R$ 184</span>
+                                <small>/mês</small>
+                            </div>
                         </div>
                     </div>
-
                     <input type="hidden" id="selectedPlanName">
                     <input type="hidden" id="selectedPlanPrice">
                     <p id="error-msg">Selecione um plano acima.</p>
@@ -320,6 +359,10 @@
                             <div class="ticket-row">
                                 <span>Plano:</span>
                                 <strong id="finalPlan">Anual</strong>
+                            </div>
+                            <div class="ticket-row">
+                                <span>Pagamento:</span>
+                                <strong id="finalMethod">Cartão</strong>
                             </div>
                             <div class="ticket-total">
                                 Total: <span id="finalPrice">R$ 0,00</span>

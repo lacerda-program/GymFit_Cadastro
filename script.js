@@ -27,7 +27,7 @@ function nextStep(step) {
             alert("Por favor, selecione um plano para continuar.");
             return;
         }
-        finishRegistration(); 
+        finishRegistration();
         return;
     }
 
@@ -48,7 +48,7 @@ function updateUI(step) {
         s.classList.remove('active');
         s.style.display = 'none';
     });
-    
+
     const targetStep = document.getElementById(`step${step}`);
     if (targetStep) {
         targetStep.classList.add('active');
@@ -71,7 +71,7 @@ function updateUI(step) {
 function atualizarTextoLateral(step) {
     const titleElem = document.getElementById('side-title');
     const descElem = document.getElementById('side-desc');
-    
+
     if (frasesPorPasso[step] && titleElem && descElem) {
         titleElem.innerText = frasesPorPasso[step].title;
         descElem.innerText = frasesPorPasso[step].desc;
@@ -93,7 +93,7 @@ function selectOption(category, value, element) {
         const selectedValues = Array.from(siblings)
             .filter(sib => sib.classList.contains('selected'))
             .map(sib => sib.dataset.value);
-        
+
         document.getElementById(category).value = selectedValues.join(',');
         return;
     }
@@ -107,16 +107,16 @@ function selectPlan(planName, price, element) {
     // Sincronizando com os IDs que o seu Step 5 vai ler
     const inputName = document.getElementById('selectedPlanName');
     const inputPrice = document.getElementById('selectedPlanPrice');
-    
-    if(inputName) inputName.value = planName;
-    if(inputPrice) inputPrice.value = price;
+
+    if (inputName) inputName.value = planName;
+    if (inputPrice) inputPrice.value = price;
 
     const allPlans = document.querySelectorAll('.plan-row');
     allPlans.forEach(plan => plan.classList.remove('selected'));
     element.classList.add('selected');
 
     const errorMsg = document.getElementById('error-msg');
-    if(errorMsg) errorMsg.style.display = 'none';
+    if (errorMsg) errorMsg.style.display = 'none';
 }
 
 // ============================================================
@@ -124,27 +124,57 @@ function selectPlan(planName, price, element) {
 // ============================================================
 
 function finishRegistration() {
-    // Pegando os valores dos campos que você definiu
-    const planName = document.getElementById('selectedPlanName')?.value;
-    const planPrice = document.getElementById('selectedPlanPrice')?.value;
+    // 1. CAPTURA DOS DADOS
+    const planName = document.getElementById('selectedPlanName')?.value || "";
+    const planPrice = document.getElementById('selectedPlanPrice')?.value || "0";
     const userName = document.getElementById('name')?.value || "Atleta";
 
-    // Preenche o Ticket Final
+    // Captura o método de pagamento
+    const selectedRadio = document.querySelector('input[name="pay_method"]:checked');
+    const paymentMethods = {
+        'cartao': 'Cartão de Crédito/Débito',
+        'pix': 'PIX (Confirmação Imediata)',
+        'cash': 'Pagamento na Recepção'
+    };
+    const paymentText = selectedRadio ? (paymentMethods[selectedRadio.value] || "A definir") : "Não selecionado";
+
+
+    // 2. REFERÊNCIA DOS ELEMENTOS (IDs do seu HTML)
     const finalNameElem = document.getElementById('finalName');
     const finalPlanElem = document.getElementById('finalPlan');
+    const finalMethodElem = document.getElementById('finalMethod');
+    if (finalMethodElem) {
+        finalMethodElem.innerText = paymentText;
+    }
     const finalPriceElem = document.getElementById('finalPrice');
+    const ticketDiv = document.querySelector('.ticket'); // Seleciona o seu quadrado pelo nome da classe
 
+    // 3. INSERÇÃO DOS DADOS
     if (finalNameElem) finalNameElem.innerText = userName;
     if (finalPlanElem) finalPlanElem.innerText = planName;
-    
-    if (finalPriceElem && planPrice) {
-        const priceFormatted = parseFloat(planPrice).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-        finalPriceElem.innerText = priceFormatted;
+    if (finalMethodElem) finalMethodElem.innerText = paymentText;
+    if (finalPriceElem) {
+        finalPriceElem.innerText = parseFloat(planPrice).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     }
+
+    // 4. APLICAÇÃO DO TEMA DOURADO
+    const elementsToGold = [finalNameElem, finalPlanElem, finalMethodElem, finalPriceElem];
+
+    if (planName.includes("Diamond")) {
+        // Aplica dourado no texto
+        elementsToGold.forEach(el => el?.classList.add('gold-status'));
+        // Aplica borda dourada no seu quadrado .ticket
+        ticketDiv?.classList.add('gold-theme');
+    } else {
+        // Remove se o plano for outro
+        elementsToGold.forEach(el => el?.classList.remove('gold-status'));
+        ticketDiv?.classList.remove('gold-theme');
+    }
+
+
 
     updateUI(5);
 }
-
 // ============================================================
 // 5. EVENT LISTENERS E INICIALIZAÇÃO
 // ============================================
@@ -152,21 +182,21 @@ function finishRegistration() {
 document.addEventListener('DOMContentLoaded', () => {
     // Listener para o método de pagamento (Dinheiro/Pix)
     document.querySelectorAll('input[name="pay_method"]').forEach((input) => {
-        input.addEventListener('change', function() {
+        input.addEventListener('change', function () {
             const cashAlert = document.getElementById('cash-alert');
             const submitBtn = document.querySelector('#step4 .btn-primary');
-            
+
             if (this.value === 'cash') {
-                if(cashAlert) cashAlert.classList.add('active');
-                if(submitBtn) {
+                if (cashAlert) cashAlert.classList.add('active');
+                if (submitBtn) {
                     submitBtn.innerHTML = 'Reservar Matrícula <i class="fas fa-money-bill-wave"></i>';
                     submitBtn.style.backgroundColor = '#28a745';
                 }
             } else {
-                if(cashAlert) cashAlert.classList.remove('active');
-                if(submitBtn) {
+                if (cashAlert) cashAlert.classList.remove('active');
+                if (submitBtn) {
                     submitBtn.innerHTML = 'Finalizar Cadastro <i class="fas fa-credit-card"></i>';
-                    submitBtn.style.backgroundColor = ''; 
+                    submitBtn.style.backgroundColor = '';
                 }
             }
         });

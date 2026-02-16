@@ -193,10 +193,54 @@ video/* Estado inicial do Plano */
 .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(65,105,225,0.3); }
 
 /*CSS para mudar as frases das imagens */ 
-.plan-benefits { list-style: none; margin-top: 10px; padding: 0; }
-.plan-benefits li { font-size: 0.8rem; color: #666; margin-bottom: 4px; }
-.plan-benefits i { color: #32CD32; margin-right: 5px; font-size: 0.7rem; }
+.plan-benefits {
+    list-style: none;
+    margin-top: 8px;
+    padding: 0;
+}
 
+.plan-benefits li {
+    font-size: 0.8rem;
+    color: var(--text-grey);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.plan-benefits li i {
+    font-size: 0.7rem;
+    color: var(--primary); /* Ou var(--gold) para o plano anual */
+}
+
+.discount-tag.gold {
+    background: linear-gradient(45deg, #d4af37, #f9e29c);
+    color: #000;
+    font-weight: 800;
+}
+/* O traço em cima do preço antigo */
+.price-old {
+    display: block;
+    text-decoration: line-through; /* Cria o risco horizontal */
+    text-decoration-color: #e74c3c; /* Cor vermelha suave para destacar o desconto */
+    color: #999;
+    font-size: 0.85rem;
+    margin-bottom: -2px;
+}
+
+.price-current {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: 900;
+    color: #1a1a1a; /* Cor forte para o preço atual */
+}
+
+/* Ajuste para o valor mensal (R$ 195,50) não quebrar a linha */
+.plan-value {
+    text-align: right;
+    white-space: nowrap;
+    min-width: 110px;
+}
 /* HOVER VERDE / SELEÇÃO AZUL */
 .plan-row { border: 2px solid #eee; transition: 0.3s; padding: 20px; border-radius: 12px; margin-bottom: 10px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
 .plan-row:hover { border-color: #32CD32; }
@@ -232,6 +276,29 @@ video/* Estado inicial do Plano */
 .plan-row.selected { border-color: var(--primary) !important; background: #f0f4ff; }
 .plan-benefits { list-style: none; padding: 0; margin-top: 5px; font-size: 0.8rem; color: #666; }
 .plan-benefits i { color: #32CD32; margin-right: 5px; }
+
+/* Classe que será aplicada dinamicamente via JS */
+/* Efeito de texto dourado */
+.gold-status {
+    background: linear-gradient(to right, #BF953F, #B38728, #B38728, #B38728, #AA771C);
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    font-weight: 800 !important;
+    display: inline-block;
+}
+
+/* Efeito no quadrado .ticket quando for Black Diamond */
+.ticket.gold-theme {
+    border: 2px solid #d4af37 !important;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+    background-color: #fffdf5; /* Tom champagne suave */
+}
+/* Opcional: Um brilho suave no card do ticket se for Gold */
+.ticket-container.gold-theme {
+    border: 2px solid #d4af37;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+}
 
 /* Animação do ciclo de cores premium */
 @keyframes colorCycle {
