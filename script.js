@@ -1,4 +1,4 @@
-// ============================================================
+﻿// ============================================================
 // 1. CONFIGURAÇÃO E ESTADO GLOBAL
 // ============================================================
 const frasesPorPasso = {
@@ -15,31 +15,51 @@ let currentStep = 1;
 // 2. NAVEGAÇÃO E INTERFACE
 // ============================================================
 
-function nextStep(step) {
-    console.log("Botão clicado! Tentando ir para o passo:", step);
-    console.log("Passo atual registrado no sistema:", currentStep);
+function validateStep(step) {
+    if (step === 1) {
+        const name = document.getElementById('name')?.value.trim() || "";
+        const email = document.getElementById('email')?.value.trim() || "";
 
-    // Validação para o passo final
-    if (currentStep === 4 && step === 5) {
-        console.log("Validando plano antes de finalizar...");
-        const planName = document.getElementById('selectedPlanName')?.value;
-        if (!planName) {
-            alert("Por favor, selecione um plano para continuar.");
-            return;
+        if (!name || !email) {
+            alert("Por favor, preencha seu nome e e-mail antes de prosseguir.");
+            return false;
         }
-        finishRegistration();
+    }
+
+    if (step === 2) {
+        const goal = document.getElementById('goal')?.value.trim() || "";
+        const level = document.getElementById('level')?.value.trim() || "";
+        const frequency = document.getElementById('frequency')?.value.trim() || "";
+        const time = document.getElementById('time')?.value.trim() || "";
+
+        if (!goal || !level || !frequency || !time) {
+            alert("Preencha seu perfil completo antes de continuar.");
+            return false;
+        }
+    }
+
+    if (step === 4) {
+        const selectedPlan = document.getElementById('selectedPlanName')?.value.trim() || "";
+        if (!selectedPlan) {
+            const errorMsg = document.getElementById('error-msg');
+            if (errorMsg) {
+                errorMsg.style.display = 'block';
+            }
+            alert("Você precisa selecionar um plano para finalizar.");
+            return false;
+        }
+    }
+
+    return true;
+}
+
+function nextStep(step) {
+    if (!validateStep(currentStep)) {
         return;
     }
 
-    // Se o código chegar aqui, ele TEM que mudar a página
-    console.log("Chamando updateUI para o passo:", step);
     updateUI(step);
 }
-
-function prevStep(step) {
-    updateUI(step);
-}
-
 function updateUI(step) {
     currentStep = step;
 
@@ -104,12 +124,17 @@ function selectOption(category, value, element) {
 }
 
 function selectPlan(planName, price, element) {
+    
     // Sincronizando com os IDs que o seu Step 5 vai ler
     const inputName = document.getElementById('selectedPlanName');
     const inputPrice = document.getElementById('selectedPlanPrice');
 
     if (inputName) inputName.value = planName;
     if (inputPrice) inputPrice.value = price;
+
+    document.getElementById('selectedPlanName').value = planName;
+    document.getElementById('selectedPlanPrice').value = price;
+
 
     const allPlans = document.querySelectorAll('.plan-row');
     allPlans.forEach(plan => plan.classList.remove('selected'));
@@ -124,6 +149,9 @@ function selectPlan(planName, price, element) {
 // ============================================================
 
 function finishRegistration() {
+    if (!validateStep(4)) {
+        return;
+    }
     // 1. CAPTURA DOS DADOS
     const planName = document.getElementById('selectedPlanName')?.value || "";
     const planPrice = document.getElementById('selectedPlanPrice')?.value || "0";
@@ -204,3 +232,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     atualizarTextoLateral(1);
 });
+
