@@ -52,6 +52,12 @@ function validateStep(step) {
 
     return true;
 }
+function prevStep() {
+    if (currentStep > 1) {
+        // Se estamos no 2, voltamos para o 1, e assim por diante
+        updateUI(currentStep - 1);
+    }
+}
 
 function nextStep(step) {
     if (!validateStep(currentStep)) {
