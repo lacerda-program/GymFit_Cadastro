@@ -54,7 +54,6 @@ function validateStep(step) {
 }
 function prevStep() {
     if (currentStep > 1) {
-        // Se estamos no 2, voltamos para o 1, e assim por diante
         updateUI(currentStep - 1);
     }
 }
@@ -92,6 +91,10 @@ function updateUI(step) {
     // D. Atualiza Progresso
     const bar = document.querySelector('.progress-bar');
     if (bar) bar.style.width = `${(step / 5) * 100}%`;
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // Rola suavemente para o topo do novo passo
+    });
 }
 
 function atualizarTextoLateral(step) {

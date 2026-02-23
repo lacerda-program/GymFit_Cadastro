@@ -335,3 +335,55 @@ video/* Estado inicial do Plano */
     font-weight: 300;
     text-shadow: 1px 2px 8px rgba(0,0,0,0.8);
 }
+
+/* AJUSTES PARA CELULAR (Telas até 768px) */
+@media (max-width: 768px) {
+    
+    /* 1. Inverte a ordem para a imagem não empurrar o formulário para baixo */
+    .container {
+        display: flex;
+        flex-direction: column-reverse; /* Formulário em cima, imagem embaixo */
+        height: auto;
+        overflow-y: auto;
+    }
+
+    .form-section {
+        width: 100%;
+        padding: 20px;
+        min-height: 100vh; /* Garante que o formulário ocupe a tela toda */
+    }
+
+    /* 2. Esconde ou diminui a seção de imagem no mobile para não poluir */
+    .image-section {
+        display: none; /* Em formulários complexos, esconder a imagem ajuda na conversão */
+    }
+
+    /* 3. Títulos menores para não quebrar linha de forma feia */
+    h2 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+
+    /* 4. Ajuste dos botões 40/60 no celular */
+    .step-buttons {
+        flex-direction: row; /* Mantém lado a lado, ou 'column' se preferir um sobre o outro */
+        gap: 10px;
+    }
+
+    .btn-secondary {
+        flex: 0 0 35%; /* Reduzi um pouco para dar mais espaço ao principal */
+        font-size: 0.9rem;
+    }
+
+    .btn-primary {
+        flex: 1;
+        font-size: 0.9rem;
+    }
+
+    /* 5. Inputs e Selects precisam de fontes maiores (mínimo 16px) 
+       para o iOS não dar zoom automático ao clicar */
+    input, select, textarea {
+        font-size: 16px !important;
+        padding: 12px;
+    }
+}
