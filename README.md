@@ -9,6 +9,13 @@ Estou disponível para entrevistas e discussões sobre arquitetura de software.
 [![Deploy Status](https://img.shields.io/badge/Status-Production-success?style=for-the-badge&logo=vercel)](https://lacerda-program.github.io/GymFit_Cadastro/)
 [![Tech Stack](https://img.shields.io/badge/Stack-Vanilla_JS-yellow?style=for-the-badge)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
+---
+
+
+ [GymFit-site](https://lacerda-program.github.io/site_banda/)  
+---
+
+
 ## 🏛️ Conceito e Arquitetura
 Este projeto consiste em uma Single Page Application (SPA) focada na **otimização da taxa de conversão (CRO)** para a academia Gym-Fit. Ao invés de um formulário monolítico, desenvolvi uma arquitetura de **"Wizard" (Passo-a-Passo)**, onde a interface atua como um gerenciador de estados, guiando o usuário através de um funil de vendas linear e intuitivo.
 
